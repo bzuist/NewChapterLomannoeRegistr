@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Delete fanfic</h1>
+<div mat-dialog-content style="display: inline; padding: 0px; margin: auto;">
+
+  <mat-form-field class="full-width-input">
+    <input matInput type="number" placeholder="FanficID"
+      [(ngModel)]="deleteFanfic.name" required>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">Cancel</button>
+  <button class="right-align" mat-raised-button color="primary"
+    [mat-dialog-close]="deleteFanfic">Удалить фанфик</button>
+</div>

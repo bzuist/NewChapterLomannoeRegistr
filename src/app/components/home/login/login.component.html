@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewChapter Login</title>
+  <link rel="stylesheet" href="./login.component.css">
+</head>
+<body>
+  <div class="nav-bar">
+    <a routerLink="/blogs">Блоги</a>
+    <a routerLink="/home">Главная</a>
+    <a routerLink="/fanfics">Работы</a>
+    <div class="logo-container">
+      <img src="https://pngimg.com/d/book_PNG2107.png" alt="NewChapter Logo" width="100">
+      <p>NewChapter</p>
+    </div>
+    <a routerLink="/search">Поиск</a>
+    <a routerLink="/menu">Меню</a>
+    <a routerLink="/home">Домой</a>
+  </div>
+
+  <div class="login-container">
+    <div class="header">
+      <h1>NewChapter</h1>
+      <p>от Главы к Книге</p>
+    </div>
+    <h2>Вход</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="input">
+        <label for="username">Имя пользователя:</label>
+        <input
+          id="username"
+          formControlName="username"
+          type="text"
+          placeholder="Введите имя пользователя"
+        />
+        <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error">
+          <p *ngIf="loginForm.get('username')?.hasError('required')">Имя пользователя обязательно.</p>
+        </div>
+      </div>
+
+      <div class="input">
+        <label for="password">Пароль:</label>
+        <input
+          id="password"
+          formControlName="password"
+          type="password"
+          placeholder="Введите пароль"
+        />
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error">
+          <p *ngIf="loginForm.get('password')?.hasError('required')">Пароль обязателен.</p>
+        </div>
+      </div>
+
+      <div class="form-buttons">
+        <button class="login-button" type="submit" [disabled]="!loginForm.valid" [ngClass]="{
+          'btn-disabled': !loginForm.valid,
+          'btn-enabled': loginForm.valid
+        }">Войти</button>
+      </div>
+    </form>
+
+    <div *ngIf="errorAuth" class="error-message">
+      Неверные учетные данные. Попробуйте снова.
+  </div>
+
+    <p class="no-account">Нет аккаунта?</p>
+    <div class="form-buttons">
+      <button class="register-button" (click)="goToRegistration()">Зарегистрироваться</button>
+    </div>
+  </div>
+</body>
+</html>

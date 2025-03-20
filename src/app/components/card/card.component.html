@@ -1,0 +1,29 @@
+<html>
+<head>
+</head>
+<style>
+  @import url("card.component.css");
+</style>
+<body>
+<div *ngFor="let fanfic of fanfics">
+<mat-card class ="example-card">
+  <mat-card-header>
+    <mat-card-title >{{fanfic.name}}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>
+      {{fanfic.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="readFanfic(fanfic.id)">READ</button>
+    <button mat-button (click)="editFanfic(fanfic)">EDIT</button>
+    <button mat-button (click)="deleteFanfic(fanfic)">DELETE</button>
+  </mat-card-actions>
+</mat-card>
+
+</div>
+<button class=".my_button" role="button" mat-raised-button (click)="addNewFanfic()">ADD YOUR NEW FANFIC!</button>
+</body>
+</html>
