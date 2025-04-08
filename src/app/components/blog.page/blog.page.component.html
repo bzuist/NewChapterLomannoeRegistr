@@ -1,1 +1,62 @@
-<p>blog.page works!</p>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewChapter</title>
+  <link rel="stylesheet" href="./blog.page.component.css">
+</head>
+<body>
+  <div class="nav-bar">
+    <a routerLink="/blogs">Блоги</a>
+    <a routerLink="/home">Главная</a>
+    <a routerLink="/fanfics">Работы</a>
+    <div class="logo-container">
+      <img src="https://pngimg.com/d/book_PNG2107.png" alt="NewChapter Logo">
+      <p>NewChapter</p>
+    </div>
+    <a routerLink="/search">Поиск</a>
+    <a routerLink="/menu">Меню</a>
+    <a routerLink="/home">Домой</a>
+  </div>
+
+ <header class="header">
+      <div class="search-login">
+        <div *ngIf="!isLoggedIn; else userProfile">
+          <a routerLink="/login">Вход</a>
+          <a routerLink="/register">Регистрация</a>
+        </div>
+        <ng-template #userProfile>
+          <a routerLink="/profile">Профиль</a>
+        </ng-template>
+      </div>
+    </header>
+  <div class="container">
+
+
+    <div class="reader">
+      <div class="controls">
+        <button (click)="increaseFontSize()">A+</button>
+        <button (click)="decreaseFontSize()">A-</button>
+      </div>
+
+      <div *ngIf="post else loading">
+        <div class="text">
+          <h1>{{post.title}}</h1>
+          <p><strong>Автор:</strong> {{ authorName }}</p>
+          <p>{{post.postdescription}}</p>
+        </div>
+      </div>
+
+      <ng-template #loading>
+        <p>Загрузка...</p>
+      </ng-template>
+    </div>
+
+    <ng-template #loading>
+      <p>Загрузка...</p>
+    </ng-template>
+  </div>
+
+</body>
+</html>

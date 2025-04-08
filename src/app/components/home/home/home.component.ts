@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
 
       const headers = new HttpHeaders({ Authorization: `Bearer ${authToken}` });
 
-      this.http.get<User>('http://localhost:3000/currentUser', { headers })
+      this.http.get<User>('http://localhost:3000/users', { headers })
         .subscribe(user => {
           this.username = user.username;
           localStorage.setItem('username', user.username);
@@ -63,10 +63,7 @@ export class HomeComponent implements OnInit {
 
   loadUsers() {
     const authToken = localStorage.getItem('authToken');
-
-    const headers = authToken
-      ? new HttpHeaders({ Authorization: `Bearer ${authToken}` })
-      : new HttpHeaders();
+    const headers = authToken ? new HttpHeaders({ Authorization: `Bearer ${authToken}` }) : new HttpHeaders();
 
     this.http.get<User[]>('http://localhost:3000/users', { headers })
       .subscribe(users => {
@@ -95,17 +92,11 @@ export class HomeComponent implements OnInit {
           return;
         }
 
-        const randomFanfics = data
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 10);
+        const randomFanfics = data.sort(() => Math.random() - 0.5).slice(0, 10);
 
         this.Fanfic = randomFanfics.map(fanfic => {
-          const userID = Array.from(this.Users.entries())
-            .find(([id, name]) => name === fanfic.author)?.[0] || 0;
-
+          const userID = Array.from(this.Users.entries()).find(([id, name]) => name === fanfic.author)?.[0] || 0;
           const authorLogin = this.Users.get(userID) || 'Неизвестный автор';
-
-          console.log(`Fanfic userID: ${userID}, author: ${authorLogin}`);
 
           return new Fanfic({ ...fanfic, userID, authorLogin }, this.Users);
         });
@@ -115,25 +106,15 @@ export class HomeComponent implements OnInit {
   showRandomPosts() {
     this.http.get<any[]>('http://localhost:3000/posts')
       .subscribe(response => {
-        if (!response || response.length === 0) {
-          console.error('Ошибка: пустой ответ от сервера', response);
+        if (!Array.isArray(response)) {
+          console.error('Ошибка: response не массив', response);
           return;
         }
 
-        const postsArray = response[0];
-
-        if (!Array.isArray(postsArray)) {
-          console.error('Ошибка: postsArray не массив', postsArray);
-          return;
-        }
-
-        const randomPosts = postsArray
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 10);
-
-        this.post = randomPosts
-          .map(post => post ? new Post(post, this.Users) : null)
-          .filter((post): post is Post => post !== null);
+        const randomPosts = response.sort(() => Math.random() - 0.5).slice(0, 10);
+        this.post = randomPosts.map(post => new Post(post, this.Users));
+      }, error => {
+        console.error('Ошибка при загрузке постов:', error);
       });
   }
 
@@ -141,8 +122,12 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  goToUserPage() {
-    this.router.navigate(['/userpage/:id']);
+  goToUserPage(userId: number) {
+    if (userId) {
+      this.router.navigate([`/userpage/${userId}`]);
+    } else {
+      console.error("Ошибка: userId не указан");
+    }
   }
 
   goToMenu() {
@@ -150,15 +135,22 @@ export class HomeComponent implements OnInit {
   }
 
   goToBlogsPage() {
-    this.router.navigate(['/blogs']);
+    this.router.navigate(['/posts']);
   }
 
   goToReadComponent(fanficId: number) {
-    this.router.navigate(['/fanfic', fanficId]);
+    if (fanficId) {
+      this.router.navigate(['/fanfic', fanficId]);
+    } else {
+      console.error("Ошибка: fanficId не указан");
+    }
   }
 
-  goToBlogComponent(postId: number) {
-    this.router.navigate(['/blogs', postId]);
-  }
+  goToBlogComponent(postId: number | undefined) {
+    if (!postId || isNaN(postId)) {
+        console.error("Ошибка: postId не указан", postId);
+        return;
+    }
+    this.router.navigate([`/posts/${postId}`]);
 }
-
+}

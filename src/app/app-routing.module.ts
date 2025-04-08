@@ -12,7 +12,7 @@ import { DialogEditWrapperComponent } from './components/fanfic-editor/dialog-ed
 import { CardComponent } from './components/card/card.component';
 import { ReadComponentComponent } from './components/read.component/read.component.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { UserpageSettingsComponent } from './components/userpage.settings/userpage.settings.component';
+import { UserpageSettingsComponent } from './components/dialog-edit-profile-wrapper.component/userpage.settings.component';
 import { UserpageComponent } from './components/userpage/userpage.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { BlogPageComponent } from './components/blog.page/blog.page.component';
@@ -48,7 +48,7 @@ const routes: Routes = [
     },
 
     {
-      path: 'blogs', component: BlogPageComponent
+      path: 'posts/:id', component: BlogPageComponent
     },
 
     {

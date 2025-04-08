@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Add Fanfic</h1>
+<h1 mat-dialog-title>Добавить фанфик</h1>
 <div mat-dialog-content style="display: inline; padding: 0px; margin: auto;">
   <mat-form-field class="full-width-input">
     <input matInput type="text" placeholder="Author name"
@@ -19,10 +19,10 @@
       </option>
     </select>
     </div>
-    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="editingFanfic.text"></angular-editor>
+    <angular-editor [placeholder]="'Начните печатать здесь...'" [(ngModel)]="editingFanfic.text"></angular-editor>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button (click)="onNoClick()">Отмена</button>
   <button class="right-align" mat-raised-button color="primary"
-    [mat-dialog-close]="editingFanfic">Add</button>
+    [mat-dialog-close]="editingFanfic">Добавить</button>
 </div>

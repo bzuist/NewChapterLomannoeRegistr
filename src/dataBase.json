@@ -52,7 +52,7 @@
   "fanfic": [
     {
       "id": "2",
-      "name": "YURIIIIII",
+      "name": "yt zjq",
       "author": "author1",
       "description": "asdasd",
       "text": "asdasd",
@@ -64,14 +64,6 @@
       "author": "author1",
       "description": "They are Lost Boys, all of them haunted by their own tragic fates. This is the story of how they met each other. A story of friendship, love, and betrayal",
       "text": "They are Lost Boys, all of them haunted by their own tragic fates. This is the story of how they met each other. A story of friendship, love, and betrayal",
-      "genre": "Drama"
-    },
-    {
-      "id": "4",
-      "name": "Orchestra Boys",
-      "author": "author",
-      "description": "orchestra and ballet kids were supposed to stay separated.the mingling of both in two boys was bound to end them in rivalry. but who knew what would happen if they decided to help each other out, starting something more than just a friendship...",
-      "text": "orchestra and ballet kids were supposed to stay separated.the mingling of both in two boys was bound to end them in rivalry. but who knew what would happen if they decided to help each other out, starting something more than just a friendship...",
       "genre": "Drama"
     },
     {
@@ -92,75 +84,92 @@
     }
   ],
   "posts": [
-      {
-        "postId": 1,
-        "userID": 1,
-        "title": "Первый пост",
-        "postdescription": "Это описание первого поста.",
-        "postcommentID": 101
-      },
-      {
-        "postId": 2,
-        "userID": 2,
-        "title": "Второй пост",
-        "postdescription": "Это описание второго поста.",
-        "postcommentID": 102
-      },
-      {
-        "postId": 3,
-        "userID": 3,
-        "title": "Третий пост",
-        "postdescription": "Это описание третьего поста.",
-        "postcommentID": 103
-      },
-      {
-        "postId": 4,
-        "userID": 4,
-        "title": "Четвёртый пост",
-        "postdescription": "Это описание четвёртого поста.",
-        "postcommentID": 104
-      },
-      {
-        "postId": 5,
-        "userID": 8038,
-        "title": "Пятый пост",
-        "postdescription": "Это описание пятого поста.",
-        "postcommentID": 105
-      },
-      {
-        "postId": 6,
-        "userID": "0a19",
-        "title": "Шестой пост",
-        "postdescription": "Это описание шестого поста.",
-        "postcommentID": 106
-      },
-      {
-        "postId": 7,
-        "userID": 1,
-        "title": "Седьмой пост",
-        "postdescription": "Это описание седьмого поста.",
-        "postcommentID": 107
-      },
-      {
-        "postId": 8,
-        "userID": 2,
-        "title": "Восьмой пост",
-        "postdescription": "Это описание восьмого поста.",
-        "postcommentID": 108
-      },
-      {
-        "postId": 9,
-        "userID": 3,
-        "title": "Девятый пост",
-        "postdescription": "Это описание девятого поста.",
-        "postcommentID": 109
-      },
-      {
-        "postId": 10,
-        "userID": 4,
-        "title": "Десятый пост",
-        "postdescription": "Это описание десятого поста.",
-        "postcommentID": 110
-      }
-    ]
-  }
+    {
+      "id": "1",
+      "userID": 1,
+      "title": "Первый пост",
+      "postdescription": "Это описание первого поста.",
+      "postcommentID": 101
+    }
+  ],
+  "postcomments": [
+    {
+      "postcommentID": 101,
+      "userID": 1,
+      "postId": 1,
+      "comment": "Это комментарий к первому посту.",
+      "id": "a1b2"
+    },
+    {
+      "postcommentID": 102,
+      "userID": 2,
+      "postId": 2,
+      "comment": "Это комментарий ко второму посту.",
+      "id": "c3d4"
+    },
+    {
+      "postcommentID": 103,
+      "userID": 3,
+      "postId": 3,
+      "comment": "Это комментарий к третьему посту.",
+      "id": "e5f6"
+    },
+    {
+      "postcommentID": 104,
+      "userID": 4,
+      "postId": 4,
+      "comment": "Это комментарий к четвёртому посту.",
+      "id": "g7h8"
+    },
+    {
+      "postcommentID": 105,
+      "userID": 8038,
+      "postId": 5,
+      "comment": "Это комментарий к пятому посту.",
+      "id": "i9j0"
+    }
+  ],
+  "bookcomments": [
+    {
+      "bookcommentID": 1,
+      "userID": 1,
+      "fanficId": 2,
+      "comment": "Это комментарий к фанфику.",
+      "id": "a1b2"
+    },
+    {
+      "bookcommentID": 2,
+      "userID": 2,
+      "fanficId": 3,
+      "comment": "Это комментарий ко второму фанфику.",
+      "id": "c3d4"
+    },
+    {
+      "bookcommentID": 3,
+      "userID": 3,
+      "fanficId": 4,
+      "comment": "Это комментарий к третьему фанфику.",
+      "id": "e5f6"
+    }
+  ],
+  "bookshelf": [
+    {
+      "bookshelfID": 1,
+      "userID": 1,
+      "fanficId": 2,
+      "id": "a1b2"
+    },
+    {
+      "bookshelfID": 2,
+      "userID": 2,
+      "fanficId": 3,
+      "id": "c3d4"
+    },
+    {
+      "bookshelfID": 3,
+      "userID": 3,
+      "fanficId": 4,
+      "id": "e5f6"
+    }
+  ]
+}

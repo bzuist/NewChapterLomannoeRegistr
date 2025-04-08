@@ -23,6 +23,7 @@ export class BaseServiceService {
   private bookshelfUrl = `${this.apiUrl}/bookshelf`;
   private postsUrl = `${this.apiUrl}/posts`;
   private blogsUrl = `${this.apiUrl}/blogs`;
+  private postUrl = `${this.apiUrl}/post`;
 
   constructor(private http: HttpClient) {}
 
@@ -34,6 +35,11 @@ export class BaseServiceService {
   // Получить фанфик по ID
   getFanficById(id: number): Observable<Fanfic> {
     return this.http.get<Fanfic>(`${this.fanficUrl}/${id}`);
+  }
+
+  // Получить пост по ID
+  getPostById(id: number): Observable<Post> {
+    return this.http.get<Post>(`${this.postsUrl}/${id}`);
   }
 
   // Добавить новый фанфик

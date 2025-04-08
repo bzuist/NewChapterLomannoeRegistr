@@ -1,5 +1,5 @@
 export interface Post {
-  postId: number;
+  id: number;
   userID: number;
   postdescription: string;
   title: string;
@@ -7,9 +7,8 @@ export interface Post {
   authorname: string;
 }
 
-
 export class Post {
-  postId: number;
+  id: number;
   userID: number;
   postdescription: string;
   title: string;
@@ -17,7 +16,7 @@ export class Post {
   authorname: string;
 
   constructor(data: any, usersMap: Map<number, string>) {
-    this.postId = data.postId;
+    this.id = data.id;
     this.userID = data.userID;
     this.title = data.title;
     this.postcommentID = data.postcommentID;

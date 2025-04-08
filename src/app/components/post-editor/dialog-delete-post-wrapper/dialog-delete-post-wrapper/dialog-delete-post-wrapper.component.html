@@ -1,1 +1,11 @@
-<p>dialog-delete-post-wrapper works!</p>
+<h1 mat-dialog-title>Delete post</h1>
+<div mat-dialog-content style="display: inline; padding: 0px; margin: auto;">
+
+  <div mat-dialog-content>
+    <p>Вы уверены, что хотите удалить пост?</p>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">Отмена</button>
+  <button mat-raised-button color="warn" (click)="onDeleteClick()">Удалить</button>
+</div>

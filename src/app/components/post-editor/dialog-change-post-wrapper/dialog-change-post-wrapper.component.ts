@@ -15,10 +15,13 @@ export class DialogChangePostWrapperComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DialogChangePostWrapperComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.changePost = data; }
+      this.changePost = new Post(this.data.post, new Map<number, string>()); }
 
   ngOnInit(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.changePost);
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

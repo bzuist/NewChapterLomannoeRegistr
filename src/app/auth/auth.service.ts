@@ -8,7 +8,6 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ROLE } from './auth role';
 import { Authority } from '../models/auth/auth';
-import { User } from '../models/user';
 
 
 @Injectable({
@@ -80,80 +79,46 @@ export class AuthService {
     return url.indexOf(section) == 0;
   }
 
-  authenticate(
-    crdls: Credential,
-    successHandler: (authToken: string, user: User) => void,
-    failureHandler: (error?: any) => void
-  ) {
-    const headers = new HttpHeaders(crdls ? {
-        authorization: 'Basic ' + btoa(crdls.username + ':' + crdls.password),
-        "X-Requested-With": "XMLHttpRequest"
-    } : {});
-
-    this.authentication(headers).subscribe({
-        next: (data: CredentialResponse | null) => {
-            if (data && data.authenticated) {
-                this.responseProcessing(data, successHandler, () => {
-                    failureHandler({ error: 'Неверный логин или пароль' });
-                });
-            } else {
-                failureHandler({ error: 'Неверный логин или пароль' });
-            }
-        },
-        error: (error: any) => {
-            let errorMessage = 'Произошла неизвестная ошибка.';
-            if (error.error?.message) {
-                errorMessage = error.error.message;
-            } else if (error.message) {
-                errorMessage = error.message;
-            } else if (error.status) {
-                errorMessage = `Ошибка HTTP ${error.status}`;
-            }
-            failureHandler({ error: errorMessage });
-        }
+  authenticate(crdls: Credential, failureHandler: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
-  }
 
-
-  private responseProcessing(
-    data: CredentialResponse,
-    successHandler: (authToken: string, user: User) => void,
-    failureHandler: () => void
-  ): boolean {
-      const response: CredentialResponse | null = CredentialResponse.convertToObj(data);
-
-      if (response !== null && response.authenticated) {
-          this.updateAuth(response);
-          this.loggedIn.next(true);
-
-          // const token = response.authToken || "";
-
-          // const user: User = response.userData || {
-          //   id: 0,
-          //   username: "Гость",
-          //   principal: null,
-          //   bookshelfID: null,
-          //   bookID: null,
-          //   postID: null
-          // } as User;
-
-
-          //successHandler(token, user);
-
-          if (this.isAdmin()) {
-              this.router.navigate(['admin']);
-          }
-          if (this.isAuthor()) {
-              this.router.navigate(['author']);
-          }
-          return true;
-      } else {
-          failureHandler();
-          return false;
+    // Отправка запроса на эндпоинт /login с логином и паролем в теле
+    this.http.post<CredentialResponse>('/login', crdls, { headers: headers }).subscribe(
+      (data: CredentialResponse | null) => {
+        console.log(data);
+        if (data != null) {
+          this.responseProcessing(data, failureHandler);
+        }
+      },
+      (error) => {
+        console.error("Ошибка входа:", error);
+        failureHandler();
       }
+    );
   }
 
-
+  private responseProcessing(data: CredentialResponse, failureHandler: () => void): boolean {
+    const response: CredentialResponse | null = CredentialResponse.convertToObj(data);
+    if (response !== null && response.authenticated == true) {
+      this.updateAuth(response);
+      this.loggedIn.next(true);
+      if(this.isAdmin())
+      {
+        this.router.navigate(['admin']);
+      }
+      if(this.isAuthor())
+      {
+        this.router.navigate(['author']);
+      }
+      return true;
+    }
+     else {
+      failureHandler();
+      return false;
+    }
+  }
 
   private updateAuth(response: CredentialResponse) {
     this.sessionStorage.set('auth', JSON.stringify(response));

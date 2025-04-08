@@ -38,7 +38,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { HttpClient } from '@angular/common/http';
 import { BlogPageComponent } from './components/blog.page/blog.page.component';
 import { FanficsPageComponent } from './components/fanfics.page/fanfics.page.component';
-import { UserpageSettingsComponent } from './components/userpage.settings/userpage.settings.component';
+import { UserpageSettingsComponent } from './components/dialog-edit-profile-wrapper.component/userpage.settings.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SearchComponent } from './components/search/search.component';
 import { DialogChangePostWrapperComponent } from './components/post-editor/dialog-change-post-wrapper/dialog-change-post-wrapper.component';

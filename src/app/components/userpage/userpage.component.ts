@@ -1,7 +1,7 @@
+import { Fanfic } from './../../models/fanfics';
 import { Bookshelf } from './../../models/bookshelf';
 import { Post } from 'src/app/models/post';
 import { Component, OnInit } from '@angular/core';
-import { Fanfic } from 'src/app/models/fanfics';
 import { User } from './../../models/user';
 import { BaseServiceService } from 'src/app/service/base-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -14,7 +14,11 @@ import { DialogDeleteWrapperComponent } from '../fanfic-editor/dialog-delete-wra
 import { PostComment } from 'src/app/models/postcomment';
 import { BookComment } from 'src/app/models/bookcomment';
 import { Genre } from 'src/app/models/genre';
-
+import { DialogChangeWrapperComponent } from '../fanfic-editor/dialog-change-wrapper/dialog-change-wrapper.component';
+import { DialogAddPostWrapperComponent } from '../post-editor/dialog-add-post-wrapper/dialog-add-post-wrapper/dialog-add-post-wrapper.component';
+import { DialogChangePostWrapperComponent } from '../post-editor/dialog-change-post-wrapper/dialog-change-post-wrapper.component';
+import { DialogDeletePostWrapperComponent } from '../post-editor/dialog-delete-post-wrapper/dialog-delete-post-wrapper/dialog-delete-post-wrapper.component';
+import { UserpageSettingsComponent } from '../dialog-edit-profile-wrapper.component/userpage.settings.component';
 
 @Component({
   selector: 'app-userpage',
@@ -128,26 +132,133 @@ export class UserpageComponent implements OnInit {
     }
   }
 
-  openFanficDialog(fanficId: number): void {
-    this.dialog.open(ReadComponentComponent, {
-      data: { fanficId }
-    });
+  changeFanfic(fanficId: number): void {
+    const fanfic = this.fanfics.find(f => f.id === fanficId);
+
+    if (fanfic) {
+        this.http.get<Genre[]>('http://localhost:3000/genres').subscribe({
+            next: (genres) => {
+                const dialogRef = this.dialog.open(DialogChangeWrapperComponent, {
+                    data: { fanfic, genres }
+                });
+
+                dialogRef.afterClosed().subscribe(result => {
+                    if (result) {
+                        console.log('Сохранённые данные фанфика:', result);
+                        this.http.put<Fanfic>(`http://localhost:3000/fanfic/${fanficId}`, result)
+                            .subscribe({
+                                next: updatedFanfic => {
+                                    console.log("Фанфик успешно обновлен на сервере:", updatedFanfic);
+                                    Object.assign(fanfic, updatedFanfic);
+                                },
+                                error: error => console.error("Ошибка при обновлении фанфика:", error)
+                            });
+                    }
+                });
+            },
+            error: (error) => {
+                console.error("Ошибка загрузки жанров:", error);
+            }
+        });
+    } else {
+        console.error("Фанфик с таким ID не найден.");
+    }
+}
+
+deleteFanfic(fanficId: number): void {
+  const fanfic = this.fanfics.find(f => f.id === fanficId);
+  const dialogRef = this.dialog.open(DialogDeleteWrapperComponent, {
+    data: { fanficId }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      console.log('Удаление подтверждено, отправляем запрос на сервер');
+      this.http.delete(`http://localhost:3000/fanfic/${fanficId}`).subscribe({
+        next: (response) => {
+          console.log('Работа успешно удалена', response);
+        },
+        error: (error) => {
+          console.error('Ошибка при удалении работы:', error);
+          alert('Ошибка при удалении работы. Пожалуйста, попробуйте снова.');
+        }
+      });
+    } else {
+      console.log('Удаление отменено пользователем');
+    }
+  });
+}
+
+
+  changePost(postId: number): void {
+    const post = this.posts.find(p => p.id === postId);
+    if (post) {
+      const dialogRef = this.dialog.open(DialogChangePostWrapperComponent, {
+        data: { post }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          console.log('Сохранённые данные поста:', result);
+          this.http.put<Post>(`http://localhost:3000/posts/${postId}`, result)
+            .subscribe({
+              next: updatedPost => {
+                console.log("Пост успешно обновлен на сервере:", updatedPost);
+                Object.assign(post, updatedPost);
+              },
+              error: error => console.error("Ошибка при обновлении поста:", error)
+            });
+        }
+      });
+    } else {
+      console.error("Пост с таким ID не найден.");
+    }
   }
 
-  editFanfic(fanfic: Fanfic): void {
-    this.dialog.open(DialogEditWrapperComponent, {
-      data: { fanfic }
-    });
-  }
 
-  deleteFanfic(fanficId: number): void {
-    this.dialog.open(DialogDeleteWrapperComponent, {
-      data: { fanficId }
+
+  deletePost(postId: number): void {
+    const dialogRef = this.dialog.open(DialogDeletePostWrapperComponent, {
+      data: { postId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(`Post with ID ${postId} successfully deleted`);
+        this.http.delete(`http://localhost:3000/posts/${postId}`).subscribe(
+          response => {
+            console.log('Пост успешно удален:', response);
+          },
+          error => {
+            console.error('Ошибка при удалении поста:', error);
+          }
+        );
+      } else {
+        console.log('Пост не был удален');
+      }
     });
   }
 
   editProfile(): void {
-    this.router.navigate(['/edit-profile']);
+    const dialogRef = this.dialog.open(UserpageSettingsComponent, {
+      data: { ...this.user }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.http.put<User>(`http://localhost:3000/users/${this.user.id}`, result).subscribe({
+          next: (updatedUser) => {
+            this.user = updatedUser;
+            console.log('Профиль успешно обновлен:', updatedUser);
+          },
+          error: (error) => {
+            console.error('Ошибка при обновлении профиля:', error);
+          }
+        });
+      } else {
+        console.log('Редактирование профиля отменено');
+      }
+    });
   }
 
   goToHome() {

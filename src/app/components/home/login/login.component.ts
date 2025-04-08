@@ -31,30 +31,21 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-      const credential: Credential = this.loginForm.value;
+      const credentials: Credential = this.loginForm.value;
 
       this.authService.authenticate(
-        credential,
-        (authToken: string, user: User) => {
-          if (!authToken || !user) {
-            console.error("Ошибка: Некорректные данные пользователя", { authToken, user });
-            this.errorAuth = true;
-            return;
-          }
-
-          console.log("Успешный вход:", user);
-          localStorage.setItem('authToken', authToken);
-          localStorage.setItem('username', user.username || "Неизвестный пользователь");
-
-          this.router.navigate(['/home']);
-        },
-        (error) => {
-          console.error("Ошибка входа:", error);
+        credentials,
+        () => {
+          console.error('Ошибка: Некорректные данные пользователя или аутентификация не удалась.');
           this.errorAuth = true;
         }
       );
+    } else {
+      console.warn('Форма логина недействительна');
+      this.errorAuth = true;
     }
   }
+
 
   goToRegistration() {
     this.router.navigate(['/registration']);
