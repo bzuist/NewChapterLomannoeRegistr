@@ -1,0 +1,64 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewChapter</title>
+  <link rel="stylesheet" href="./userpage.component.css">
+</head>
+<body>
+  <div class="nav-bar">
+    <a routerLink="/blogs">Блоги</a>
+    <a routerLink="/home">Главная</a>
+    <a routerLink="/fanfics">Работы</a>
+    <div class="logo-container">
+      <img src="https://pngimg.com/d/book_PNG2107.png" alt="NewChapter Logo" width="100">
+      <p>NewChapter</p>
+    </div>
+    <a routerLink="/search">Поиск</a>
+    <a routerLink="/menu">Пользовательское соглашение</a>
+    <a routerLink="/home">Домой</a>
+  </div>
+
+  <div class="user-container">
+    <div class="user-info">
+      <div *ngIf="user" class="user-header">
+        <h1>Профиль: {{ user.username }}</h1>
+        <button class="edit-profile" (click)="editProfile()">Изменить профиль</button>
+      </div>
+      <div *ngIf="!user">
+        <p>Загрузка пользователя...</p>
+      </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="column">
+        <h3>Произведения пользователя</h3>
+        <div class="grid">
+          <div *ngFor="let fanfic of fanfics" class="card">
+            <h4>{{ fanfic.name }}</h4>
+            <p>{{ fanfic.description }}</p>
+            <div class="buttons">
+              <button class="read" (click)="goToReadComponent(fanfic.id)">Читать</button>
+              <button class="edit" (click)="changeFanfic(fanfic.id)">Изменить</button>
+              <button class="delete" (click)="deleteFanfic(fanfic.id)">Удалить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <h3>Блоги пользователя</h3>
+        <div class="grid">
+          <div *ngFor="let post of posts" class="card">
+            <h4>{{ post.title }}</h4>
+            <h3>{{ post.postdescription | slice:0:50 }}{{ post.postdescription.length > 50 ? '...' : '' }}</h3>
+            <div class="buttons">
+              <button class="read" (click)="goToBlogComponent(post.id)">Перейти</button>
+              <button class="edit" (click)="changePost(post.id)">Изменить</button>
+              <button class="delete" (click)="deletePost(post.id)">Удалить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

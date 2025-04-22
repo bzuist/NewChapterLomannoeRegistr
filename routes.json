@@ -1,0 +1,27 @@
+{
+  "/fanfics": {
+    "GET": {
+      "action": "db.fanfics."
+    },
+    "POST": {
+      "action": "db.fanfics.push(req.body)",
+      "path": "/api/fanfics"
+    },
+    "DELETE": {
+      "action": "db.fanfics.delete(req.body)",
+      "path": "/api/fanfics"
+    }
+  },
+  "/api/post/:id": {
+    "GET": {
+      "action": "db.post.find(data => data.id == :id)"
+    },
+    "PUT": {
+      "action": "db.post.find(data => data.id == :id).completed = true"
+    },
+    "DELETE": {
+      "action": "db.post = db.post.filter(data => data.id != :id)"
+    }
+  }
+
+}

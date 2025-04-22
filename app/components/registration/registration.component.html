@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewChapter Registration</title>
+  <link rel="stylesheet" href="./registration.component.css">
+</head>
+<body>
+  <div class="nav-bar">
+    <a routerLink="/blogs">Блоги</a>
+    <a routerLink="/home">Главная</a>
+    <a routerLink="/fanfics">Работы</a>
+    <div class="logo-container">
+      <img src="https://pngimg.com/d/book_PNG2107.png" alt="NewChapter Logo" width="100">
+      <p>NewChapter</p>
+    </div>
+    <a routerLink="/search">Поиск</a>
+    <a routerLink="/menu">Пользовательское соглашение</a>
+    <a routerLink="/home">Домой</a>
+  </div>
+
+  <div class="registration-container">
+    <div class="header">
+      <h1>NewChapter</h1>
+      <p>от Главы к Книге</p>
+    </div>
+    <h2>Регистрация</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <!-- Имя пользователя -->
+      <div class="input">
+        <label for="username">Имя пользователя:</label>
+        <input
+          id="username"
+          formControlName="username"
+          type="text"
+          placeholder="Введите имя пользователя"
+        />
+        <div *ngIf="usernameTakenError" class="error">
+          {{ usernameTakenError }}
+        </div>
+        <div *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched" class="error">
+          <p *ngIf="registrationForm.get('username')?.hasError('required')">Имя пользователя обязательно.</p>
+          <p *ngIf="registrationForm.get('username')?.hasError('minlength')">Минимальная длина имени пользователя — 3 символа.</p>
+        </div>
+      </div>
+
+      <!-- Пароль -->
+      <div class="input">
+        <label for="password">Пароль:</label>
+        <input
+          id="password"
+          formControlName="password"
+          type="password"
+          placeholder="Введите пароль"
+        />
+        <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched" class="error">
+          <p *ngIf="registrationForm.get('password')?.hasError('required')">Пароль обязателен.</p>
+          <p *ngIf="registrationForm.get('password')?.hasError('minlength')">Минимальная длина пароля — 6 символов.</p>
+        </div>
+      </div>
+
+      <!-- Подтверждение пароля -->
+      <div class="input">
+        <label for="confirmPassword">Подтвердите пароль:</label>
+        <input
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          type="password"
+          placeholder="Подтвердите пароль"
+        />
+        <div *ngIf="registrationForm.errors?.['mismatch'] && registrationForm.get('confirmPassword')?.touched" class="error">
+          Пароли не совпадают.
+        </div>
+      </div>
+
+      <!-- Код администратора -->
+      <div class="input">
+        <label for="adminCode">Код администратора:</label>
+        <input
+          id="adminCode"
+          formControlName="adminCode"
+          type="text"
+          placeholder="Введите код администратора (если есть)"
+        />
+      </div>
+
+      <!-- Кнопка отправки -->
+      <div class="form-buttons">
+        <button class="register-button" type="submit" [disabled]="!registrationForm.valid" [ngClass]="{
+          'btn-disabled': !registrationForm.valid,
+          'btn-enabled': registrationForm.valid
+        }">Зарегистрироваться</button>
+      </div>
+    </form>
+
+    <!-- Ошибка регистрации -->
+    <div *ngIf="registrationError" class="error">
+      {{ registrationError }}
+    </div>
+
+    <!-- Требования к регистрации -->
+    <div class="requirements">
+      <h3>Требования к регистрации:</h3>
+      <ul>
+        <li>Имя пользователя должно содержать минимум 3 символа.</li>
+        <li>Пароль должен содержать минимум 6 символов и включать как минимум одну заглавную букву, одну строчную букву и одну цифру.</li>
+        <li>Пароли должны совпадать.</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

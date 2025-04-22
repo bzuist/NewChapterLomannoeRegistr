@@ -1,0 +1,14 @@
+<h1>Student editor</h1>
+{{editingFanfic.name}} {{editingFanfic.description}} {{editingFanfic.text}} {{editingFanfic.userID}} {{editingFanfic.genreID}}
+<br/>
+<input [(ngModel)]="editingFanfic.name" type="text">
+<br/>
+<input [(ngModel)]="editingFanfic.description" type="text">
+<br/>
+<input [(ngModel)]="editingFanfic.genreID" type="number">
+<br/>
+<input [(ngModel)]="editingFanfic.userID" type="number">
+<br/>
+<input [(ngModel)]="editingFanfic.text" type="text">
+<button (click)="addFanfic()">Добавить фанфик</button>
+<br>

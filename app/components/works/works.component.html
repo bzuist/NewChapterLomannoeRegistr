@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewChapter</title>
+  <link rel="stylesheet" href="./works.component.css">
+</head>
+<body>
+  <div class="nav-bar">
+    <a routerLink="/blogs">Блоги</a>
+    <a routerLink="/home">Главная</a>
+    <a routerLink="/fanfics">Работы</a>
+    <div class="logo-container">
+      <img src="https://pngimg.com/d/book_PNG2107.png" alt="NewChapter Logo">
+      <p>NewChapter</p>
+    </div>
+    <a routerLink="/search">Поиск</a>
+    <a routerLink="/menu">Пользовательское соглашение</a>
+    <a routerLink="/home">Домой</a>
+  </div>
+  <div class="container">
+    <header class="header">
+      <div class="auth-container">
+        <ng-container *ngIf="!isLoggedIn; else userProfile">
+          <p class="auth-message">Кажется, вы не вошли в систему</p>
+          <div class="auth-buttons">
+            <a routerLink="/login" class="btn login-btn">Вход</a>
+            <a routerLink="/registration" class="btn register-btn">Регистрация</a>
+          </div>
+        </ng-container>
+      <ng-template #userProfile>
+        <div class="profile-box">
+          <p>{{ username }}</p>
+          <div class="profile-buttons">
+            <a routerLink="/profile" class="btn">Мой профиль</a>
+            <button class="btn" (click)="logout()">Выйти</button>
+          </div>
+        </div>
+      </ng-template>
+      </div>
+    </header>
+  </div>
+
+    <section class="works">
+      <h2>Популярные произведения</h2>
+      <div class="grid">
+        <div *ngFor="let work of Fanfic" class="card">
+          <h3>Название работы: {{ work.name }}</h3>
+          <h3>Описание работы: {{ work.description }}</h3>
+          <p>Автор: {{ work.authorLogin }}</p>
+          <button mat-flat-button color="white" (click)="goToReadComponent(work.id)">Читать далее</button>
+        </div>
+      </div>
+    </section>
+  </body>
+  </html>
