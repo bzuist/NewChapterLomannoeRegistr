@@ -45,6 +45,8 @@ import { DialogAddPostWrapperComponent } from './components/post-editor/dialog-a
 import { DialogDeletePostWrapperComponent } from './components/post-editor/dialog-delete-post-wrapper/dialog-delete-post-wrapper/dialog-delete-post-wrapper.component';
 import { WorksComponent } from './components/works/works.component';
 import { BlogsComponent } from './components/blogs/blogs.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 
@@ -94,7 +96,14 @@ import { BlogsComponent } from './components/blogs/blogs.component';
     MatCardModule, MatButtonModule,
 
   ],
-  providers: [BaseServiceService, SessionStorageService],
+  providers: [
+    BaseServiceService,
+    SessionStorageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent],
   entryComponents: [
     DialogEditWrapperComponent,

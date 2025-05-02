@@ -15,7 +15,7 @@
   <div> Genre
     <select [(ngModel)]="editingFanfic.genreID">
       <option *ngFor="let genre of data.genres" [value]="genre.id">
-        {{ genre.genre_name }}
+        <p>{{ genre.genre | json }}</p>
       </option>
     </select>
     </div>

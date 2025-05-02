@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Fanfic } from 'src/app/models/fanfics';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
-import { HttpHeaders } from '@angular/common/http';
 import { Genre } from 'src/app/models/genre';
 
 @Component({
@@ -35,8 +34,11 @@ export class SearchComponent implements OnInit {
       });
     }
 
-    this.loadUsers();
-    this.loadFanfics();
+    // Загружаем пользователей, потом фанфики
+    this.loadUsers().then(() => {
+      this.loadFanfics();
+    });
+
     this.loadGenres();
   }
 
@@ -67,29 +69,32 @@ export class SearchComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  loadUsers() {
-    const authToken = localStorage.getItem('authToken');
-    const headers = authToken ? new HttpHeaders({ Authorization: `Bearer ${authToken}` }) : new HttpHeaders();
+  loadUsers(): Promise<void> {
+    return new Promise((resolve) => {
+      const authToken = localStorage.getItem('authToken');
+      const headers = authToken ? new HttpHeaders({ Authorization: `Bearer ${authToken}` }) : new HttpHeaders();
 
-    this.http.get<User[]>('http://localhost:3000/users', { headers })
-      .subscribe(users => {
-        users.forEach(user => {
-          const userID = Number(user.id) || user.userID;
-          if (userID && user.username) {
-            this.Users.set(userID, user.username);
-          } else {
-            console.warn("Некорректный пользователь:", user);
-          }
+      this.http.get<User[]>('http://localhost:3000/users', { headers })
+        .subscribe(users => {
+          users.forEach(user => {
+            const userID = Number(user.id) || user.userID;
+            if (userID && user.username) {
+              this.Users.set(userID, user.username);
+            }
+          });
+          resolve();
+        }, error => {
+          console.error("Ошибка при загрузке пользователей:", error);
+          resolve();
         });
-      }, error => {
-        console.error("Ошибка при загрузке пользователей:", error);
-      });
+    });
   }
 
   loadFanfics() {
-    this.http.get<Fanfic[]>('http://localhost:3000/fanfic').subscribe({
+    this.http.get<any[]>('http://localhost:3000/fanfic').subscribe({
       next: (data) => {
-        this.fanfics = data;
+
+        this.fanfics = data.map(item => new Fanfic(item, this.Users));
       },
       error: (error) => {
         console.error('Ошибка загрузки фанфиков:', error);

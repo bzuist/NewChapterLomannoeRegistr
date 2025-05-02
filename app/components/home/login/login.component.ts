@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log ("Login started");
     if (this.loginForm.valid) {
       const credentials: Credential = this.loginForm.value;
 

@@ -37,7 +37,7 @@
       "username": "reader123",
       "password": "password123",
       "roles": [
-        "READER"
+        "SUPER_USER"
       ]
     },
     {
@@ -53,7 +53,7 @@
       "username": "fanatic92",
       "password": "ilovebooks",
       "roles": [
-        "READER"
+        "SUPER_USER"
       ]
     },
     {
@@ -61,30 +61,41 @@
       "username": "editor456",
       "password": "editormaster",
       "roles": [
-        "EDITOR"
+        "SUPER_USER"
       ]
+    },
+    {
+      "id": "a1ef",
+      "username": "jmyougotnojams",
+      "password": "123456",
+      "roles": ["AUTHOR"]
     }
   ],
   "genres": [
     {
       "genreID": "1",
-      "genre": "Drama"
+      "genre": "Drama",
+      "id": "6312"
     },
     {
       "genreID": "2",
-      "genre": "Romance"
+      "genre": "Romance",
+      "id": "2a7f"
     },
     {
       "genreID": "3",
-      "genre": "Fantasy"
+      "genre": "Fantasy",
+      "id": "fd8a"
     },
     {
       "genreID": "4",
-      "genre": "Horror"
+      "genre": "Horror",
+      "id": "1ab6"
     },
     {
       "genreID": "5",
-      "genre": "Science Fiction"
+      "genre": "Science Fiction",
+      "id": "41fd"
     }
   ],
   "fanfic": [
@@ -95,7 +106,7 @@
       "description": "This story follows a young girl who discovers a hidden world filled with magic and secrets. As she delves further into this enchanting realm, she realizes that her destiny is intertwined with that of the land itself. The challenges she faces are not just external but also resonate within her heart, questioning who she really is and what she desires.",
       "text": "In the solitude of the forest, where sunlight barely pierced through the dense canopy, lived Elara, a girl burdened by the weight of loneliness. Every day she ventured deeper into the woods, seeking solace in its silence. The trees whispered tales of ancient times, and she wondered if she would ever uncover their mysteries. One day, she stumbled upon a shimmering portal hidden behind an ancient oak tree. Curiosity ignited her spirit, and with a deep breath, she stepped through.\n\nOn the other side lay a world unlike any she had known. Colors erupted around her, vibrant and alive. Creatures of all shapes and sizes roamed freely, their laughter mingling with the melody of a distant brook. Elara was captivated. As days turned to weeks, she met many friends and learned about magic that bound this world together. However, looming shadows grew as dark forces threatened to tear apart the harmony of her new home. Elara realized she had a purpose: to protect this realm. But the journey ahead would test her courage, reveal hidden truths, and demand sacrifices she never anticipated.\n\nEmboldened by newfound friends, she embarked on an epic quest filled with triumph and despair. Each step drew her closer to uncovering the shadows within herself, leading her to understand that true strength comes not just from outer magic but from within. The fate of two worlds hinged on her choices — would she rise to the challenge or falter under the weight of destiny?",
       "genre": "Fantasy",
-      "genreID": [4, 1, 2]
+      "genreID": "fd8a"
     },
     {
       "id": "2",
@@ -103,7 +114,9 @@
       "userID": 5,
       "description": "Tom comes to Dumbledore with an unusual request. He seeks to uncover the truth hidden deep within his mind, a truth that has haunted him since childhood. Thus begins a tumultuous journey into the psyche, exploring the boundaries of memory, power, and morality.",
       "text": "The chamber was dimly lit, shadows dancing on the walls as Tom Riddle sat across from Albus Dumbledore. Anxiety trembled in the air as he revealed his harrowing request — to delve into the depths of his own mind, to confront memories he had long buried. Dumbledore's gaze was piercing, not out of judgment, but with understanding. The task was fraught with risks, yet the thirst for truth was a powerful motivator.\n\nAs they began the process of Legilimency, Tom found himself on a journey through fragmented recollections, a maze of emotions that twisted and turned with every thought. Each memory he encountered revealed pieces of his identity: the boy in the orphanage, the whispers of his ancestors, the first encounter with magic. Pain mixed with joy as he confronted not only his past but also the choices that shaped his future.\n\nThe experience was transformative. Tom realized that true power came with understanding oneself, recognizing the shadows and light within. Yet, the deeper he delved, the more chilling revelations awaited him. Would he find redemption, or was he destined to repeat the cycle of darkness? The boundaries of morality blurred as he faced the ultimate question: was he the master of his fate, or merely a pawn in a greater game?",
-      "genreID": [4]
+      "genreID": [
+        4
+      ]
     },
     {
       "id": "3",
@@ -111,7 +124,10 @@
       "userID": 5,
       "description": "A space explorer races against time to save a dying planet, navigating treacherous galaxies filled with strange creatures and perilous obstacles. In a race against fate, alliances will form, and sacrifices will be made as the fate of countless worlds hangs in the balance.",
       "text": "Commander Jax Orion stood on the bridge of the starship Nebula, staring into the abyss of space. A message had come through just hours before — the planet Zareth, once thriving with life, was on the brink of extinction. The stars above shimmered like distant memories, all too familiar yet forever out of reach. Jax knew that time was running out; the fate of millions rested on his shoulders.\n\nSetting a course for Zareth, the crew worked tirelessly, their unity tested by the ominous news. As they traveled deeper into the cosmos, they encountered ferocious storms, alien ships, and formidable foes. Each challenge brought them closer together, forging bonds that would last a lifetime. Yet, their mission was fraught with peril. The remnants of an ancient war still echoed in the cosmic winds, threatening to ensnare them in a web of conflict.\n\nUpon arrival, Jax discovered that Zareth’s plight was tied to a deeper conspiracy, one that reached far beyond his comprehension. With each revelation, he found himself battling not only against external forces but also the darkness within. Would his courageous decisions lead them to salvation, or would they be swallowed by the very stars they sought to protect? In a race against time, the weight of the universe bore down upon him, forcing him to confront the echoes of his past — and the legacy he sought to leave behind.",
-      "genreID": [3,4]
+      "genreID": [
+        3,
+        4
+      ]
     },
     {
       "id": "4",
@@ -119,7 +135,10 @@
       "userID": 5,
       "description": "A chilling tale of a forest that holds dark secrets, where every shadow hides a story and every whisper carries the weight of the past. As one family delves into its depths, they must navigate their own fears to uncover the truth.",
       "text": "The villagers spoke of the Dark Forest in hushed tones, casting wary glances towards its borders. Few dared to enter, for those who did rarely returned unchanged. The forest was a labyrinth of gnarled trees and mist, its secrets woven into the very fabric of the land. When Clara and her family moved to the area, they couldn’t shake the feeling that something was watching them from beyond the tree line.\n\nOne fateful evening, curiosity got the better of them. They ventured into the woods, drawn by a melody that seemed to beckon them deeper into the shadows. With each step, the air thickened, the trees seemed to close in around them, and the haunting melody morphed into whispers — whispers of lost souls, echoing the regrets and dreams of those who had come before.\n\nAs they journeyed further, Clara found herself entangled in the stories of the forest: a tale of betrayal, love, and sacrifice, where each tree bore witness to the passage of time. The deeper they delved, the more the forest revealed its secrets, testing their resolve and forcing them to confront fears long buried. Would they find the key to breaking the forest's curse, or would they become just another chapter in its dark tale? With the weight of their family's legacy hanging in the balance, the true battle was against the darkness within themselves and the choices they were yet to make.",
-      "genreID": [2,4]
+      "genreID": [
+        2,
+        4
+      ]
     },
     {
       "id": "5",
@@ -127,7 +146,10 @@
       "userID": 5,
       "description": "A gripping tale of survival on a distant planet, where one expedition team uncovers the remnants of a lost civilization. As they unravel the mysteries left behind, they must grapple with the implications of their discoveries.",
       "text": "The barren landscape stretched endlessly beneath the twin suns, casting long shadows that danced across the dusty plains. The team of explorers, led by Captain Lira Frost, stepped cautiously from their vessel, their hearts pounding with a mix of excitement and trepidation. This was the last unexplored corner of the galaxy, and the rumors of a lost civilization were too compelling to resist.\n\nAs they journeyed deeper into the heart of the planet, remnants of the ancient society began to emerge — crumbling structures adorned with symbols long forgotten. Whispers of their history played tricks on Lira's mind, invoking visions of a time when harmony reigned. But as they delved into the ruins, the team discovered not all was as it seemed. Strange occurrences haunted their every move: shadows that lingered, echoes of laughter that faded into silence, and a growing sense of dread that gnawed at their sanity.\n\nEach finding brought with it more questions than answers. What had happened to the civilization that once thrived here? Why had they vanished? As the team faced one obstacle after another, they also confronted their own ambitions and moral dilemmas, each discovery weighing heavily on their conscience. With the stakes rising and tensions flaring, Lira knew the true challenge lay not just in uncovering the secrets of the past but in facing the darker aspects of human nature itself. Would they emerge from the shadows, or would the last horizon become their final resting place?",
-      "genreID": [1,4]
+      "genreID": [
+        1,
+        4
+      ]
     }
   ],
   "posts": [
