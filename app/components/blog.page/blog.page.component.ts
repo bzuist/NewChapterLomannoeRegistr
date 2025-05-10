@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { HttpClient } from '@angular/common/http';
 import { Post } from 'src/app/models/post';
+import { CredentialResponse } from 'src/app/models/auth/CredentialResponse';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-blog.page',
@@ -25,11 +27,14 @@ export class BlogPageComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private router: Router,
+    private authservice: AuthService,
     private elRef: ElementRef) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!localStorage.getItem('authToken');
+    //this.isLoggedIn = !!localStorage.getItem('authToken');
     this.loadUsers();
+    const auth = localStorage.getItem('auth');
+    if (auth) this.isLoggedIn = true;
 
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam !== null) {
@@ -45,9 +50,25 @@ export class BlogPageComponent implements OnInit {
       console.error("Ошибка при загрузке поста:", error);
     },
   });
-
-
 }
+
+get LoggedUser(): CredentialResponse{
+  const auth = localStorage.getItem('auth');
+  if (!auth) return new CredentialResponse();
+  return JSON.parse(auth) as CredentialResponse;
+}
+
+get userDisplayName(): string {
+  return this.LoggedUser?.name || 'Неизвестный пользователь';
+}
+
+logout() {
+  localStorage.removeItem('authToken');
+  localStorage.removeItem('auth');
+  this.isLoggedIn = false;
+  this.router.navigate(['/login']);
+}
+
 loadUsers() {
   this.http.get<User[]>('http://localhost:3000/users')
     .subscribe({
@@ -109,5 +130,20 @@ goToUserPage() {
 goToMenu() {
   this.router.navigate(['/menu']);
 }
+
+goToLogin() {
+  this.router.navigate(['/login']);
 }
 
+goToRegister() {
+  this.router.navigate(['/register']);
+}
+
+goToProfile() {
+  const userId = this.LoggedUser?.userData?.id;
+  if (userId) {
+    this.router.navigate([`/userpage/${userId}`]);
+  } else {
+    console.error('ID пользователя не найден');
+  }
+}}

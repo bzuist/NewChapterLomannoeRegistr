@@ -18,6 +18,22 @@
     <a routerLink="/userpage/:id">Домой</a>
   </div>
 
+  <div class="auth-card-wrapper">
+    <div class="auth-card">
+      <div *ngIf="isLoggedIn">
+        <p>Добро пожаловать, {{ userDisplayName }}!</p>
+        <button (click)="goToProfile()">Мой профиль</button>
+        <button (click)="logout()">Выйти</button>
+      </div>
+
+      <div *ngIf="!isLoggedIn">
+        <p>Вы не авторизованы</p>
+        <button (click)="goToLogin()">Войти</button>
+        <button (click)="goToRegister()">Зарегистрироваться</button>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <h2>Улучшить профиль</h2>
 

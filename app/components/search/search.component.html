@@ -19,25 +19,21 @@
     <a routerLink="/userpage/:id">Домой</a>
   </div>
 
-  <div class="container">
-    <div class="auth-container">
-      <ng-container *ngIf="!isLoggedIn; else userProfile">
-        <p class="auth-message">Кажется, вы не вошли в систему</p>
-        <div class="auth-buttons">
-          <a routerLink="/login" class="btn login-btn">Вход</a>
-          <a routerLink="/registration" class="btn register-btn">Регистрация</a>
-        </div>
-      </ng-container>
-      <ng-template #userProfile>
-        <div class="profile-box">
-          <p>{{ username }}</p>
-          <div class="profile-buttons">
-            <a routerLink="/profile" class="btn">Мой профиль</a>
-            <button class="btn" (click)="logout()">Выйти</button>
-          </div>
-        </div>
-      </ng-template>
+  <div class="auth-card-wrapper">
+    <div class="auth-card">
+      <div *ngIf="isLoggedIn">
+        <p>Добро пожаловать, {{ userDisplayName }}!</p>
+        <button (click)="goToProfile()">Мой профиль</button>
+        <button (click)="logout()">Выйти</button>
+      </div>
+
+      <div *ngIf="!isLoggedIn">
+        <p>Вы не авторизованы</p>
+        <button (click)="goToLogin()">Войти</button>
+        <button (click)="goToRegister()">Зарегистрироваться</button>
+      </div>
     </div>
+  </div>
 
     <div class="search-container">
       <h2>Поиск фанфиков</h2>
@@ -82,5 +78,4 @@
         </div>
       </div>
     </div>
-  </div>
   </body>

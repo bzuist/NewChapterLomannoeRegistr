@@ -20,18 +20,21 @@
     <a routerLink="/home">Домой</a>
   </div>
 
- <header class="header">
-      <div class="search-login">
-        <div *ngIf="!isLoggedIn; else userProfile">
-          <a routerLink="/login">Вход</a>
-          <a routerLink="/register">Регистрация</a>
-        </div>
-        <ng-template #userProfile>
-          <a routerLink="/profile">Профиль</a>
-        </ng-template>
+  <div class="auth-card-wrapper">
+    <div class="auth-card">
+      <div *ngIf="isLoggedIn">
+        <p>Добро пожаловать, {{ userDisplayName }}!</p>
+        <button (click)="goToProfile()">Мой профиль</button>
+        <button (click)="logout()">Выйти</button>
       </div>
-    </header>
-  <div class="container">
+
+      <div *ngIf="!isLoggedIn">
+        <p>Вы не авторизованы</p>
+        <button (click)="goToLogin()">Войти</button>
+        <button (click)="goToRegister()">Зарегистрироваться</button>
+      </div>
+    </div>
+  </div>
 
 
     <div class="reader">
@@ -56,7 +59,6 @@
     <ng-template #loading>
       <p>Загрузка...</p>
     </ng-template>
-  </div>
 
 </body>
 </html>

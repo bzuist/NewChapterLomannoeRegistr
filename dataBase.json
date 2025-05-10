@@ -63,39 +63,28 @@
       "roles": [
         "SUPER_USER"
       ]
-    },
-    {
-      "id": "a1ef",
-      "username": "jmyougotnojams",
-      "password": "123456",
-      "roles": ["AUTHOR"]
     }
   ],
   "genres": [
     {
       "genreID": "1",
-      "genre": "Drama",
-      "id": "6312"
+      "genre": "Drama"
     },
     {
       "genreID": "2",
-      "genre": "Romance",
-      "id": "2a7f"
+      "genre": "Romance"
     },
     {
       "genreID": "3",
-      "genre": "Fantasy",
-      "id": "fd8a"
+      "genre": "Fantasy"
     },
     {
       "genreID": "4",
-      "genre": "Horror",
-      "id": "1ab6"
+      "genre": "Horror"
     },
     {
       "genreID": "5",
-      "genre": "Science Fiction",
-      "id": "41fd"
+      "genre": "Science Fiction"
     }
   ],
   "fanfic": [
@@ -105,8 +94,9 @@
       "userID": 5,
       "description": "This story follows a young girl who discovers a hidden world filled with magic and secrets. As she delves further into this enchanting realm, she realizes that her destiny is intertwined with that of the land itself. The challenges she faces are not just external but also resonate within her heart, questioning who she really is and what she desires.",
       "text": "In the solitude of the forest, where sunlight barely pierced through the dense canopy, lived Elara, a girl burdened by the weight of loneliness. Every day she ventured deeper into the woods, seeking solace in its silence. The trees whispered tales of ancient times, and she wondered if she would ever uncover their mysteries. One day, she stumbled upon a shimmering portal hidden behind an ancient oak tree. Curiosity ignited her spirit, and with a deep breath, she stepped through.\n\nOn the other side lay a world unlike any she had known. Colors erupted around her, vibrant and alive. Creatures of all shapes and sizes roamed freely, their laughter mingling with the melody of a distant brook. Elara was captivated. As days turned to weeks, she met many friends and learned about magic that bound this world together. However, looming shadows grew as dark forces threatened to tear apart the harmony of her new home. Elara realized she had a purpose: to protect this realm. But the journey ahead would test her courage, reveal hidden truths, and demand sacrifices she never anticipated.\n\nEmboldened by newfound friends, she embarked on an epic quest filled with triumph and despair. Each step drew her closer to uncovering the shadows within herself, leading her to understand that true strength comes not just from outer magic but from within. The fate of two worlds hinged on her choices — would she rise to the challenge or falter under the weight of destiny?",
-      "genre": "Fantasy",
-      "genreID": "fd8a"
+      "genreID": [
+        4
+      ]
     },
     {
       "id": "2",
@@ -194,22 +184,19 @@
       "postcommentID": 103,
       "userID": 5,
       "postId": 4,
-      "comment": "Я люблю читать детективы под дождем.",
-      "id": "h7i8"
+      "comment": "Я люблю читать детективы под дождем."
     },
     {
       "postcommentID": 104,
       "userID": 6,
       "postId": 5,
-      "comment": "Мой любимый фанфик - это 'Галактические Эхо'! Он просто потрясающий!",
-      "id": "j9k0"
+      "comment": "Мой любимый фанфик - это 'Галактические Эхо'! Он просто потрясающий!"
     },
     {
       "postcommentID": 105,
       "userID": 7,
       "postId": 6,
-      "comment": "Не могу дождаться выхода следующей книги в трилогии!",
-      "id": "l1m2"
+      "comment": "Не могу дождаться выхода следующей книги в трилогии!"
     }
   ],
   "bookcomments": [
@@ -217,42 +204,36 @@
       "bookcommentID": 4,
       "userID": 5,
       "fanficId": 7,
-      "comment": "Это невероятный фанфик! Потрясающая история.",
-      "id": "g7h8"
+      "comment": "Это невероятный фанфик! Потрясающая история."
     },
     {
       "bookcommentID": 5,
       "userID": 6,
       "fanficId": 8,
-      "comment": "Настоящий ужас! Один из лучших рассказов в жанре.",
-      "id": "i9j0"
+      "comment": "Настоящий ужас! Один из лучших рассказов в жанре."
     },
     {
       "bookcommentID": 6,
       "userID": 7,
       "fanficId": 9,
-      "comment": "Научная фантастика всегда была моим любимым жанром!",
-      "id": "k1l2"
+      "comment": "Научная фантастика всегда была моим любимым жанром!"
     }
   ],
   "bookshelf": [
     {
       "bookshelfID": 4,
       "userID": 5,
-      "fanficId": 7,
-      "id": "m3n4"
+      "fanficId": 7
     },
     {
       "bookshelfID": 5,
       "userID": 6,
-      "fanficId": 8,
-      "id": "o5p6"
+      "fanficId": 8
     },
     {
       "bookshelfID": 6,
       "userID": 7,
-      "fanficId": 9,
-      "id": "q7r8"
+      "fanficId": 9
     }
   ]
 }

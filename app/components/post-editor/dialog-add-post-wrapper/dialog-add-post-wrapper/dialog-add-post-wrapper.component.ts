@@ -6,6 +6,8 @@ import { Post } from 'src/app/models/post';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CredentialResponse } from 'src/app/models/auth/CredentialResponse';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -22,12 +24,32 @@ export class DialogAddPostWrapperComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    console.log(this.data.genres)
-      this.addPost = new Post(this.data.fanfic, new Map<number, string>());
+    const user = this.LoggedUser;
+
+      const userId = user.userData?.id;
+      const username = user.userData?.username;
+
+      const usersMap = new Map<number, string>();
+      if (userId && username) {
+        usersMap.set(Number(userId), username);
+      }
+
+      const postcData = {
+        ...this.data.post,
+        userID: userId,
+        author: userId,
+      };
+      this.addPost = new Post(this.data.post, new Map<number, string>());
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  get LoggedUser(): CredentialResponse {
+    const auth = localStorage.getItem('auth');
+    if (!auth) return new CredentialResponse();
+    return JSON.parse(auth) as CredentialResponse;
   }
 
 }

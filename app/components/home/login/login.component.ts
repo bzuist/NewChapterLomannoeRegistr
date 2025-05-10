@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         () => {
           console.error('Ошибка: Некорректные данные пользователя или аутентификация не удалась.');
           this.errorAuth = true;
+          console.log ("Login started");
         }
       );
     } else {

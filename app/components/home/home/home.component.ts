@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/auth/auth.service';
 import { principal } from './../../../models/principal';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -6,6 +7,7 @@ import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
+import { CredentialResponse } from 'src/app/models/auth/CredentialResponse';
 
 @Component({
   selector: 'app-home',
@@ -19,45 +21,28 @@ export class HomeComponent implements OnInit {
   isLoggedIn = false;
   username: string | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private authservice: AuthService) {}
 
   ngOnInit(): void {
-    const authToken = localStorage.getItem('authToken');
-    this.isLoggedIn = !!authToken;
-
-    if (this.isLoggedIn) {
-      this.getCurrentUser().then(() => {
-        this.username = localStorage.getItem('username');
-      });
-    }
-
+    const auth = localStorage.getItem('auth');
+    if (auth) this.isLoggedIn = true;
     this.loadUsers();
   }
 
-  getCurrentUser(): Promise<void> {
-    return new Promise((resolve) => {
-      const authToken = localStorage.getItem('authToken');
-      if (!authToken) return resolve();
+  get LoggedUser(): CredentialResponse{
+    const auth = localStorage.getItem('auth');
+    if (!auth) return new CredentialResponse();
+    return JSON.parse(auth) as CredentialResponse;
+  }
 
-      const headers = new HttpHeaders({ Authorization: `Bearer ${authToken}` });
-
-      this.http.get<User>('http://localhost:3000/users', { headers })
-        .subscribe(user => {
-          this.username = user.username;
-          localStorage.setItem('username', user.username);
-          resolve();
-        }, error => {
-          console.error("Ошибка загрузки пользователя:", error);
-          resolve();
-        });
-    });
+  get userDisplayName(): string {
+    return this.LoggedUser?.name || 'Неизвестный пользователь';
   }
 
   logout() {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('username');
+    localStorage.removeItem('auth');
     this.isLoggedIn = false;
-    this.username = null;
     this.router.navigate(['/login']);
   }
 
@@ -71,8 +56,6 @@ export class HomeComponent implements OnInit {
           const userID = Number(user.id) || user.userID;
           if (userID && user.username) {
             this.Users.set(userID, user.username);
-          } else {
-            console.warn("Некорректный пользователь:", user);
           }
         });
         this.showRandomBooks();
@@ -81,6 +64,7 @@ export class HomeComponent implements OnInit {
         console.error("Ошибка при загрузке пользователей:", error);
       });
   }
+
 
   showRandomBooks() {
     if (this.Users.size === 0) return;
@@ -118,29 +102,21 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  goToHome() {
-    this.router.navigate(['/home']);
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 
-
-  goToWorks(){
-    this.router.navigate(['/works']);
+  goToRegister() {
+    this.router.navigate(['/register']);
   }
 
-  goToUserPage(userId: number) {
+  goToProfile() {
+    const userId = this.LoggedUser?.userData?.id;
     if (userId) {
       this.router.navigate([`/userpage/${userId}`]);
     } else {
-      console.error("Ошибка: userId не указан");
+      console.error('ID пользователя не найден');
     }
-  }
-
-  goToMenu() {
-    this.router.navigate(['/menu']);
-  }
-
-  goToBlogsPage() {
-    this.router.navigate(['/posts']);
   }
 
   goToReadComponent(fanficId: number) {

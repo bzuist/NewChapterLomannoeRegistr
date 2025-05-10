@@ -1,26 +1,37 @@
 <h1 mat-dialog-title>Добавить фанфик</h1>
-<div mat-dialog-content style="display: inline; padding: 0px; margin: auto;">
+
+<div *ngIf="editingFanfic" mat-dialog-content style="display: inline; padding: 0px; margin: auto;">
+
   <mat-form-field class="full-width-input">
-    <input matInput type="text" placeholder="Author name"
-      [(ngModel)]="editingFanfic.userID" required>
+    <input matInput type="text" placeholder="Автор"
+      {{ userDisplayName }} >
   </mat-form-field>
+
   <mat-form-field class="full-width-input">
     <input matInput type="text" placeholder="Name of Fanfic"
       [(ngModel)]="editingFanfic.name" required>
   </mat-form-field>
+
   <mat-form-field class="full-width-input">
     <input matInput type="text" placeholder="Description of Fanfic"
       [(ngModel)]="editingFanfic.description" required>
   </mat-form-field>
-  <div> Genre
+
+  <div>
+    Жанр:
     <select [(ngModel)]="editingFanfic.genreID">
       <option *ngFor="let genre of data.genres" [value]="genre.id">
-        <p>{{ genre.genre | json }}</p>
+        {{ genre.genre }}
       </option>
     </select>
-    </div>
-    <angular-editor [placeholder]="'Начните печатать здесь...'" [(ngModel)]="editingFanfic.text"></angular-editor>
+  </div>
+
+  <angular-editor
+    [placeholder]="'Начните печатать здесь...'"
+    [(ngModel)]="editingFanfic.text">
+  </angular-editor>
 </div>
+
 <div mat-dialog-actions>
   <button mat-raised-button (click)="onNoClick()">Отмена</button>
   <button class="right-align" mat-raised-button color="primary"

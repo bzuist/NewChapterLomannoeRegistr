@@ -4,6 +4,8 @@ import { Fanfic } from 'src/app/models/fanfics';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
+import { CredentialResponse } from 'src/app/models/auth/CredentialResponse';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-works',
@@ -15,46 +17,46 @@ export class WorksComponent implements OnInit {
   Users: Map<number, string> = new Map();
   isLoggedIn = false;
   username: string | null = null;
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private authservice: AuthService) { }
 
   ngOnInit(): void {
-    const authToken = localStorage.getItem('authToken');
-    this.isLoggedIn = !!authToken;
-
-    if (this.isLoggedIn) {
-      this.getCurrentUser().then(() => {
-        this.username = localStorage.getItem('username');
-      });
-    }
-
+    const auth = localStorage.getItem('auth');
+    if (auth) this.isLoggedIn = true;
     this.loadUsers();
   }
 
-  getCurrentUser(): Promise<void> {
-    return new Promise((resolve) => {
-      const authToken = localStorage.getItem('authToken');
-      if (!authToken) return resolve();
+  get LoggedUser(): CredentialResponse{
+    const auth = localStorage.getItem('auth');
+    if (!auth) return new CredentialResponse();
+    return JSON.parse(auth) as CredentialResponse;
+  }
 
-      const headers = new HttpHeaders({ Authorization: `Bearer ${authToken}` });
-
-      this.http.get<User>('http://localhost:3000/users', { headers })
-        .subscribe(user => {
-          this.username = user.username;
-          localStorage.setItem('username', user.username);
-          resolve();
-        }, error => {
-          console.error("Ошибка загрузки пользователя:", error);
-          resolve();
-        });
-    });
+  get userDisplayName(): string {
+    return this.LoggedUser?.name || 'Неизвестный пользователь';
   }
 
   logout() {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('username');
+    localStorage.removeItem('auth');
     this.isLoggedIn = false;
-    this.username = null;
     this.router.navigate(['/login']);
+  }
+
+goToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
+
+  goToProfile() {
+    const userId = this.LoggedUser?.userData?.id;
+    if (userId) {
+      this.router.navigate([`/userpage/${userId}`]);
+    } else {
+      console.error('ID пользователя не найден');
+    }
   }
 
   loadUsers() {

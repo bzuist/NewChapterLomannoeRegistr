@@ -91,7 +91,6 @@ export class AuthService {
     });
 
     const url = `${this.apiUrl}?username=${encodeURIComponent(crdls.username)}&password=${encodeURIComponent(crdls.password)}`;
-    debugger
     this.http.get<any[]>(url, { headers }).subscribe(
       (users: any[]) => {
         if (users.length === 1) {
@@ -103,7 +102,6 @@ export class AuthService {
             authToken: 'FAKE_TOKEN_' + user.username,
             userData: user
           };
-          debugger
           this.responseProcessing(response, failureHandler);
         } else {
           console.error("Пользователь не найден или введены неверные данные");
@@ -121,7 +119,6 @@ export class AuthService {
   private responseProcessing(data: CredentialResponse, failureHandler: () => void): boolean {
     const response: CredentialResponse | null = CredentialResponse.convertToObj(data);
     if (response !== null && response.authenticated == true) {
-      debugger
       this.updateAuth(response);
       this.loggedIn.next(true);
       if(this.isAdmin())
@@ -130,7 +127,7 @@ export class AuthService {
       }
       if(this.isAuthor())
       {
-        this.router.navigate(['author']);
+        this.router.navigate(['/main']);
       }
       return true;
     }
@@ -141,6 +138,7 @@ export class AuthService {
   }
 
   private updateAuth(response: CredentialResponse) {
+    debugger
     localStorage.setItem('auth', JSON.stringify(response));
   }
 

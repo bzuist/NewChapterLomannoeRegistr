@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { HttpClient } from '@angular/common/http';
 import { Genre } from 'src/app/models/genre';
+import { CredentialResponse } from 'src/app/models/auth/CredentialResponse';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-read.component',
@@ -29,11 +31,13 @@ export class ReadComponentComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private router: Router,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private authservice: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = !!localStorage.getItem('authToken');
+    const auth = localStorage.getItem('auth');
+    if (auth) this.isLoggedIn = true;
     this.loadUsers();
 
     const idParam = this.route.snapshot.paramMap.get('id');
@@ -162,5 +166,38 @@ export class ReadComponentComponent implements OnInit {
 
   goToMenu() {
     this.router.navigate(['/menu']);
+  }
+  get LoggedUser(): CredentialResponse{
+    const auth = localStorage.getItem('auth');
+    if (!auth) return new CredentialResponse();
+    return JSON.parse(auth) as CredentialResponse;
+  }
+
+  get userDisplayName(): string {
+    return this.LoggedUser?.name || 'Неизвестный пользователь';
+  }
+
+  logout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('auth');
+    this.isLoggedIn = false;
+    this.router.navigate(['/login']);
+  }
+
+goToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
+
+  goToProfile() {
+    const userId = this.LoggedUser?.userData?.id;
+    if (userId) {
+      this.router.navigate([`/userpage/${userId}`]);
+    } else {
+      console.error('ID пользователя не найден');
+    }
   }
 }

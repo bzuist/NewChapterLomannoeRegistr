@@ -32,6 +32,7 @@
     <div class="content-wrapper">
       <div class="column">
         <h3>Произведения пользователя</h3>
+        <button class="delete" (click)="addFanfic()">Добавить новый пост</button>
         <div class="grid">
           <div *ngFor="let fanfic of fanfics" class="card">
             <h4>{{ fanfic.name }}</h4>
@@ -47,6 +48,7 @@
 
       <div class="column">
         <h3>Блоги пользователя</h3>
+        <button class="delete" (click)="addPost()">Добавить новый пост</button>
         <div class="grid">
           <div *ngFor="let post of posts" class="card">
             <h4>{{ post.title }}</h4>
