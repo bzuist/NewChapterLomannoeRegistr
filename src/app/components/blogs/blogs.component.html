@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NewChapter</title>
-  <link rel="stylesheet" href="./home.component.css">
+  <link rel="stylesheet" href="./blogs.component.css">
 </head>
 <body>
   <div class="nav-bar">
@@ -19,40 +19,29 @@
     <a routerLink="/menu">Пользовательское соглашение</a>
     <a routerLink="/userpage/:id">Домой</a>
   </div>
+  <div class="container">
+    <header class="header">
 
-  <div class="auth-card-wrapper">
-    <div class="auth-card">
-      <div *ngIf="isLoggedIn">
-        <p>Добро пожаловать, {{ userDisplayName }}!</p>
-        <button (click)="goToProfile()">Мой профиль</button>
-        <button (click)="logout()">Выйти</button>
-      </div>
+      <div class="auth-card-wrapper">
+        <div class="auth-card">
+          <div *ngIf="isLoggedIn">
+            <p>Добро пожаловать, {{ userDisplayName }}!</p>
+            <button (click)="goToProfile()">Мой профиль</button>
+            <button (click)="logout()">Выйти</button>
+          </div>
 
-      <div *ngIf="!isLoggedIn">
-        <p>Вы не авторизованы</p>
-        <button (click)="goToLogin()">Войти</button>
-        <button (click)="goToRegister()">Зарегистрироваться</button>
-      </div>
-    </div>
-  </div>
-
-
-    <section class="works">
-      <h2>Популярные произведения</h2>
-      <div class="grid">
-        <div *ngFor="let work of Fanfic" class="card">
-          <h3>Название работы: {{ work.name }}</h3>
-          <h3>Описание работы: {{ work.description }}</h3>
-          <p>Автор: {{ work.authorLogin }}</p>
-          <button mat-flat-button color="white" (click)="goToReadComponent(work.id)">Читать далее</button>
+          <div *ngIf="!isLoggedIn">
+            <p>Вы не авторизованы</p>
+            <button (click)="goToLogin()">Войти</button>
+            <button (click)="goToRegister()">Зарегистрироваться</button>
+          </div>
         </div>
-      </div>
-    </section>
-
+    </div>
+    </header>
     <section class="blogs">
       <h2>Популярные записи в блогах</h2>
       <div class="grid">
-        <div *ngFor="let post of post" class="card">
+        <div *ngFor="let post of Post" class="card">
           <p>Автор: {{ Users.get(post.userID) }}</p>
           <h3>{{ post.title }}</h3>
           <h3>{{ post.postdescription | slice:0:50 }}{{ post.postdescription.length > 50 ? '...' : '' }}</h3>
@@ -60,5 +49,6 @@
         </div>
       </div>
     </section>
-</body>
+  </div>
+  </body>
 </html>

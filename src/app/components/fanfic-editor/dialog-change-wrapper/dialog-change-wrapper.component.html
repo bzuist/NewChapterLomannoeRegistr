@@ -14,7 +14,7 @@
     <h1 mat-dialog-title>Изменить жанр работы</h1>
     <select [(ngModel)]="changeFanfic.genreID">
       <option *ngFor="let genre of data.genres" [value]="genre.id">
-        {{ genre.genre_name }}
+        <p>{{ genre.genre | json }}</p>
       </option>
     </select>
   </div>

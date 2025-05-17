@@ -1,1 +1,110 @@
-<p>menu works!</p>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="nav-bar">
+    <a routerLink="/blogs">Блоги</a>
+    <a routerLink="/main">Главная</a>
+    <a routerLink="/works">Работы</a>
+    <div class="logo-container">
+      <img src="https://pngimg.com/d/book_PNG2107.png" alt="NewChapter Logo" width="100" />
+      <p>NewChapter</p>
+    </div>
+    <a routerLink="/search">Поиск</a>
+    <a routerLink="/menu">Пользовательское соглашение</a>
+    <a routerLink="/userpage/:id">Домой</a>
+  </div>
+
+  <div class="auth-card-wrapper">
+    <div class="auth-card">
+      <div *ngIf="isLoggedIn">
+        <p>Добро пожаловать, {{ userDisplayName }}!</p>
+        <button (click)="goToProfile()">Мой профиль</button>
+        <button (click)="logout()">Выйти</button>
+      </div>
+
+      <div *ngIf="!isLoggedIn">
+        <p>Вы не авторизованы</p>
+        <button (click)="goToLogin()">Войти</button>
+        <button (click)="goToRegister()">Зарегистрироваться</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Улучшить профиль</h2>
+
+    <div class="input-block">
+      <input type="text" placeholder="Имя">
+      <input type="email" placeholder="Email">
+    </div>
+
+    <div class="subscription-options">
+      <label>
+        <input type="radio" name="plan" [value]="300" [(ngModel)]="selectedPrice">
+        1 месяц — 300 ₽
+      </label><br>
+      <label>
+        <input type="radio" name="plan" [value]="500" [(ngModel)]="selectedPrice">
+        3 месяца — 500 ₽
+      </label><br>
+      <label>
+        <input type="radio" name="plan" [value]="1000" [(ngModel)]="selectedPrice">
+        6 месяцев — 1000 ₽
+      </label>
+    </div>
+
+    <div>
+      <p>Итого: <strong>{{ selectedPrice || 0 }}</strong> ₽</p>
+      <button class="pay-button" (click)="proceedPayment()">ОПЛАТИТЬ</button>
+    </div>
+
+
+    <div class="agreement">
+      <h3>Пользовательское соглашение</h3>
+      <p><strong>1. Общие положения</strong><br>
+      1.1. Настоящее Пользовательское соглашение (далее – Соглашение) регулирует отношения между сайтом NewChapter (далее – Сайт) и пользователями (далее – Пользователь).<br>
+      1.2. Используя Сайт, Пользователь соглашается с условиями данного Соглашения.<br>
+      1.3. Если Пользователь не согласен с условиями Соглашения, он обязан немедленно прекратить использование Сайта.</p>
+
+      <p><strong>2. Предмет соглашения</strong><br>
+      2.1. Сайт предоставляет доступ к функциям: чтение, публикация текстов, блоги, подписки.<br>
+      2.2. Все сервисы предоставляются "как есть", без гарантий.</p>
+
+      <p><strong>3. Регистрация и учетная запись</strong><br>
+      3.1. Некоторые функции доступны только зарегистрированным пользователям.<br>
+      3.2. Пользователь обязуется указывать достоверную информацию.<br>
+      3.3. Ответственность за сохранность данных лежит на Пользователе.</p>
+
+      <p><strong>4. Обязанности пользователя</strong><br>
+      4.1. Соблюдать законы РФ и международные нормы.<br>
+      4.2. Не размещать запрещённые материалы.<br>
+      4.3. Не использовать сайт в мошеннических целях.<br>
+      4.4. Уважать других пользователей.</p>
+
+      <p><strong>5. Интеллектуальная собственность</strong><br>
+      5.1. Контент на сайте принадлежит авторам или Администрации.<br>
+      5.2. Копирование без разрешения запрещено.</p>
+
+      <p><strong>6. Подписка и оплата</strong><br>
+      6.1. Подписка платная, с расширенным функционалом.<br>
+      6.2. Оплата проходит через платёжные сервисы.<br>
+      6.3. Возврат не осуществляется, если иное не указано.</p>
+
+      <p><strong>7. Ответственность</strong><br>
+      7.1. Сайт не несёт ответственность за сбои.<br>
+      7.2. Аккаунт может быть заблокирован при нарушении условий.</p>
+
+      <p><strong>8. Изменения в соглашении</strong><br>
+      8.1. Администрация может изменять Соглашение.<br>
+      8.2. Продолжение использования считается согласием.</p>
+
+      <p><strong>9. Контакты</strong><br>
+      Вопросы направлять на почту: support&#64;newchapter.ru</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -28,6 +28,7 @@ export class DialogChangeWrapperComponent implements OnInit {
 
   onSaveClick(): void {
     this.dialogRef.close(this.changeFanfic);
+    console.log('Сохраняемые жанры:', this.changeFanfic.genreID);
   }
 
   onNoClick(): void {

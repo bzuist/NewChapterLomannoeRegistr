@@ -7,15 +7,15 @@
 <body>
   <div class="nav-bar">
     <a routerLink="/blogs">Блоги</a>
-    <a routerLink="/home">Главная</a>
-    <a routerLink="/fanfics">Работы</a>
+    <a routerLink="/main">Главная</a>
+    <a routerLink="/works">Работы</a>
     <div class="logo-container">
-      <img src="https://pngimg.com/d/book_PNG2107.png" alt="NewChapter Logo">
+      <img src="https://pngimg.com/d/book_PNG2107.png" alt="NewChapter Logo" width="100" />
       <p>NewChapter</p>
     </div>
     <a routerLink="/search">Поиск</a>
-    <a routerLink="/menu">Меню</a>
-    <a routerLink="/home">Домой</a>
+    <a routerLink="/menu">Пользовательское соглашение</a>
+    <a routerLink="/userpage/:id">Домой</a>
   </div>
 
   <div class="user-container">
@@ -32,10 +32,11 @@
     <div class="content-wrapper">
       <div class="column">
         <h3>Произведения пользователя</h3>
+        <button class="delete" (click)="addFanfic()">Добавить новое произведение</button>
         <div class="grid">
           <div *ngFor="let fanfic of fanfics" class="card">
             <h4>{{ fanfic.name }}</h4>
-            <p>{{ fanfic.description }}</p>
+            <div [innerHTML]="decodeHtml(fanfic.description)"></div>
             <div class="buttons">
               <button class="read" (click)="goToReadComponent(fanfic.id)">Читать</button>
               <button class="edit" (click)="changeFanfic(fanfic.id)">Изменить</button>
@@ -47,10 +48,11 @@
 
       <div class="column">
         <h3>Блоги пользователя</h3>
+        <button class="delete" (click)="addPost()">Добавить новый пост</button>
         <div class="grid">
           <div *ngFor="let post of posts" class="card">
             <h4>{{ post.title }}</h4>
-            <p>{{ post.postdescription }}</p>
+            <h3>{{ post.postdescription | slice:0:50 }}{{ post.postdescription.length > 50 ? '...' : '' }}</h3>
             <div class="buttons">
               <button class="read" (click)="goToBlogComponent(post.id)">Перейти</button>
               <button class="edit" (click)="changePost(post.id)">Изменить</button>

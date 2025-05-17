@@ -8,6 +8,7 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ROLE } from './auth role';
 import { Authority } from '../models/auth/auth';
+import { Breakpoints } from '@angular/cdk/layout';
 
 
 @Injectable({
@@ -24,19 +25,26 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.post('/api/register', crdls, { headers: headers }).pipe(
-      tap(response => console.log('Registration successful:', response)),
-      catchError(this.handleLoginError('registration error', null))
+
+    return this.http.post<any>('http://localhost:3000/users', crdls, { headers }).pipe(
+      tap(response => {
+        console.log('Registration successful:', response);
+      }),
+      catchError(error => {
+        console.error('Registration failed:', error);
+        return this.handleLoginError('registration error', null)(error);
+      })
     );
   }
+
 
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private router: Router,
     private http: HttpClient,
-    private sessionStorage: SessionStorageService) {
-      const auth = this.sessionStorage.get('auth');
-      this.loggedIn.next(this.isAuthNotEmpty(auth));
+  ) {
+    const auth = localStorage.getItem('auth');
+    this.loggedIn.next(this.isAuthNotEmpty(auth ?? ""));
   }
 
   get isLoggedIn() {
@@ -44,10 +52,8 @@ export class AuthService {
   }
 
   get LoggedUser(): CredentialResponse {
-    const auth = this.sessionStorage.get('auth');
-    if(auth == null || auth == "") {
-      return new CredentialResponse();
-    }
+    const auth = localStorage.getItem('auth');
+    if (!auth) return new CredentialResponse();
     return JSON.parse(auth) as CredentialResponse;
   }
 
@@ -79,17 +85,27 @@ export class AuthService {
     return url.indexOf(section) == 0;
   }
 
-  authenticate(crdls: Credential, failureHandler: any) {
+  authenticate(crdls: Credential, failureHandler: () => void) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
-    // Отправка запроса на эндпоинт /login с логином и паролем в теле
-    this.http.post<CredentialResponse>('/login', crdls, { headers: headers }).subscribe(
-      (data: CredentialResponse | null) => {
-        console.log(data);
-        if (data != null) {
-          this.responseProcessing(data, failureHandler);
+    const url = `${this.apiUrl}?username=${encodeURIComponent(crdls.username)}&password=${encodeURIComponent(crdls.password)}`;
+    this.http.get<any[]>(url, { headers }).subscribe(
+      (users: any[]) => {
+        if (users.length === 1) {
+          const user = users[0];
+          const response: CredentialResponse = {
+            authenticated: true,
+            name: user.username,
+            authorities: user.roles?.map((r: string) => ({ authority: r })) || [],
+            authToken: 'FAKE_TOKEN_' + user.username,
+            userData: user
+          };
+          this.responseProcessing(response, failureHandler);
+        } else {
+          console.error("Пользователь не найден или введены неверные данные");
+          failureHandler();
         }
       },
       (error) => {
@@ -99,6 +115,7 @@ export class AuthService {
     );
   }
 
+
   private responseProcessing(data: CredentialResponse, failureHandler: () => void): boolean {
     const response: CredentialResponse | null = CredentialResponse.convertToObj(data);
     if (response !== null && response.authenticated == true) {
@@ -106,11 +123,11 @@ export class AuthService {
       this.loggedIn.next(true);
       if(this.isAdmin())
       {
-        this.router.navigate(['admin']);
+        this.router.navigate(['/main']);
       }
       if(this.isAuthor())
       {
-        this.router.navigate(['author']);
+        this.router.navigate(['/main']);
       }
       return true;
     }
@@ -121,7 +138,8 @@ export class AuthService {
   }
 
   private updateAuth(response: CredentialResponse) {
-    this.sessionStorage.set('auth', JSON.stringify(response));
+    debugger
+    localStorage.setItem('auth', JSON.stringify(response));
   }
 
   logout() {
@@ -133,7 +151,7 @@ export class AuthService {
 
   clearLoginData() {
     this.loggedIn.next(false);
-    this.sessionStorage.remove('auth');
+    localStorage.removeItem('auth');
   }
 
   authentication(headers: HttpHeaders): Observable<any> {

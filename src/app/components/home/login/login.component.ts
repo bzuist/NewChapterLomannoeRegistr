@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log ("Login started");
     if (this.loginForm.valid) {
       const credentials: Credential = this.loginForm.value;
 
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit {
         () => {
           console.error('Ошибка: Некорректные данные пользователя или аутентификация не удалась.');
           this.errorAuth = true;
+          console.log ("Login started");
         }
       );
     } else {
@@ -51,11 +53,15 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/registration']);
   }
   goToHome() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/main']);
   }
 
-  goToUserPage() {
-    this.router.navigate(['/userpage/:id']);
+  goToUserPage(userId: number) {
+    if (userId) {
+      this.router.navigate([`/userpage/${userId}`]);
+    } else {
+      console.error("Ошибка: userId не указан");
+    }
   }
 
   goToMenu() {
@@ -70,7 +76,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/fanfic', fanficId]);
   }
 
-  goToBlogComponent(postId: number) {
-    this.router.navigate(['/blogs', postId]);
+  goToWorks(){
+    this.router.navigate(['/works']);
   }
 }

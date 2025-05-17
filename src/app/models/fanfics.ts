@@ -4,7 +4,7 @@ export class Fanfic {
   userID: number;
   description: string;
   text: string;
-  genreID : number;
+  genreID: number | string | number[];
   fanficcommentID: number;
   authorLogin: string;
 
@@ -14,7 +14,7 @@ constructor(data: any, usersMap: Map<number, string>) {
   this.userID = data.userID || data.author;
   this.description = data.description;
   this.text = data.text;
-  this.genreID = data.genreID;
+  this.genreID = data.genreID || [];
   this.fanficcommentID = data.fanficcommentID || null;
   this.authorLogin = usersMap.get(data.userID) as string;
 }}
@@ -24,7 +24,7 @@ export interface Fanfic {
   userID: number;
   description: string;
   text: string;
-  genreID : number;
+  genreID: number | string | number[];
   fanficcommentID: number;
   authorLogin: string;
 }

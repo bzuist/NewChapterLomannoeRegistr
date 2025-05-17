@@ -35,7 +35,6 @@ export class UserpageComponent implements OnInit {
 
   constructor(
     private baseService: BaseServiceService,
-    private route: Router,
     public dialog: MatDialog,
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
@@ -124,13 +123,81 @@ export class UserpageComponent implements OnInit {
     });
   }
 
-  navigateToPost(postId: number): void {
-    if (postId) {
-      this.route.navigate(['/post', postId]);
-    } else {
-      console.error("Ошибка: Неверный ID поста.");
+  addFanfic(): void {
+  this.http.get<Fanfic[]>('http://localhost:3000/fanfic').subscribe({
+    next: (fanfics) => {
+      const maxId = fanfics.reduce((max, f) => {
+        const id = typeof f.id === 'number' ? f.id : parseInt(f.id, 10);
+        return !isNaN(id) && id > max ? id : max;
+      }, 0);
+
+      const newId = maxId + 1;
+
+      this.http.get<Genre[]>('http://localhost:3000/genres').subscribe({
+        next: (genres) => {
+          const dialogRef = this.dialog.open(DialogEditWrapperComponent, {
+            data: { fanfic: { id: newId.toString() }, genres }
+          });
+
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              console.log('Новый фанфик:', result);
+              this.http.post<Fanfic>('http://localhost:3000/fanfic', result)
+                .subscribe({
+                  next: newFanfic => {
+                    console.log("Фанфик успешно добавлен на сервер:", newFanfic);
+                    this.fanfics.push(newFanfic);
+                  },
+                  error: error => console.error("Ошибка при добавлении фанфика:", error)
+                });
+            }
+          });
+        },
+        error: error => {
+          console.error("Ошибка загрузки жанров:", error);
+        }
+      });
+    },
+    error: error => {
+      console.error("Ошибка загрузки фанфиков:", error);
     }
-  }
+  });
+}
+
+
+ addPost(): void {
+  this.http.get<Post[]>('http://localhost:3000/posts').subscribe({
+    next: (posts) => {
+      const maxId = posts.reduce((max, post) => {
+        const id = typeof post.id === 'number' ? post.id : parseInt(post.id, 10);
+        return !isNaN(id) && id > max ? id : max;
+      }, 0);
+
+      const newId = maxId + 1;
+
+      const dialogRef = this.dialog.open(DialogAddPostWrapperComponent, {
+        data: { userId: this.user.id, id: newId }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          console.log('Новый пост:', result);
+          this.http.post<Post>('http://localhost:3000/posts', result).subscribe({
+            next: newPost => {
+              console.log("Пост успешно добавлен на сервер:", newPost);
+              this.posts.push(newPost);
+            },
+            error: error => console.error("Ошибка при добавлении поста:", error)
+          });
+        }
+      });
+    },
+    error: (error) => {
+      console.error("Ошибка при загрузке постов:", error);
+    }
+  });
+}
+
 
   changeFanfic(fanficId: number): void {
     const fanfic = this.fanfics.find(f => f.id === fanficId);
@@ -177,6 +244,9 @@ deleteFanfic(fanficId: number): void {
       this.http.delete(`http://localhost:3000/fanfic/${fanficId}`).subscribe({
         next: (response) => {
           console.log('Работа успешно удалена', response);
+          next: () => {
+          this.fanfics = this.fanfics.filter(f => f.id !== fanficId);
+}
         },
         error: (error) => {
           console.error('Ошибка при удалении работы:', error);
@@ -228,6 +298,9 @@ deleteFanfic(fanficId: number): void {
         this.http.delete(`http://localhost:3000/posts/${postId}`).subscribe(
           response => {
             console.log('Пост успешно удален:', response);
+            next: () => {
+          this.posts = this.posts.filter(p => p.id !== postId);
+}
           },
           error => {
             console.error('Ошибка при удалении поста:', error);
@@ -261,12 +334,18 @@ deleteFanfic(fanficId: number): void {
     });
   }
 
+  decodeHtml(html: string): string {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+}
+
   goToHome() {
     this.router.navigate(['/home']);
   }
 
   goToUserPage() {
-    this.router.navigate(['/userpage/:id']);
+    this.router.navigate([`/userpage/${this.user.id}`]);
   }
 
   goToMenu() {
@@ -282,6 +361,6 @@ deleteFanfic(fanficId: number): void {
   }
 
   goToBlogComponent(postId: number) {
-    this.router.navigate(['/blogs', postId]);
+    this.router.navigate(['/posts', postId]);
   }
 }

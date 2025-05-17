@@ -18,7 +18,7 @@ export class DialogChangePostWrapperComponent implements OnInit {
       this.changePost = new Post(this.data.post, new Map<number, string>()); }
 
   ngOnInit(): void {
-    this.dialogRef.close(this.changePost);
+
   }
 
   onNoClick(): void {

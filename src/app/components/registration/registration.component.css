@@ -1,10 +1,14 @@
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #4b0000;
-  color: #fff;
   font-family: 'Courier New', Courier, monospace;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  background-color: #4b0000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
 
 .nav-bar {
   display: flex;

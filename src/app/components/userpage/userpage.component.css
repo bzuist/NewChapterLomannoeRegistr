@@ -1,9 +1,14 @@
 body {
-  margin: 0;
   font-family: 'Courier New', Courier, monospace;
-  background-color: #4b0000;
   color: #fff;
+  margin: 0;
+  padding: 0;
+  background-color: #4b0000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
 
 .nav-bar {
   display: flex;

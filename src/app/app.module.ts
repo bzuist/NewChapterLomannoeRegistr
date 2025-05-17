@@ -37,14 +37,18 @@ import { UserpageComponent } from './components/userpage/userpage.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { HttpClient } from '@angular/common/http';
 import { BlogPageComponent } from './components/blog.page/blog.page.component';
-import { FanficsPageComponent } from './components/fanfics.page/fanfics.page.component';
 import { UserpageSettingsComponent } from './components/dialog-edit-profile-wrapper.component/userpage.settings.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SearchComponent } from './components/search/search.component';
 import { DialogChangePostWrapperComponent } from './components/post-editor/dialog-change-post-wrapper/dialog-change-post-wrapper.component';
 import { DialogAddPostWrapperComponent } from './components/post-editor/dialog-add-post-wrapper/dialog-add-post-wrapper/dialog-add-post-wrapper.component';
 import { DialogDeletePostWrapperComponent } from './components/post-editor/dialog-delete-post-wrapper/dialog-delete-post-wrapper/dialog-delete-post-wrapper.component';
-
+import { WorksComponent } from './components/works/works.component';
+import { BlogsComponent } from './components/blogs/blogs.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -63,13 +67,14 @@ import { DialogDeletePostWrapperComponent } from './components/post-editor/dialo
     UserpageComponent,
     RegistrationComponent,
     BlogPageComponent,
-    FanficsPageComponent,
     UserpageSettingsComponent,
     MenuComponent,
     SearchComponent,
     DialogChangePostWrapperComponent,
     DialogAddPostWrapperComponent,
     DialogDeletePostWrapperComponent,
+    WorksComponent,
+    BlogsComponent
   ],
   imports: [
     BrowserModule,
@@ -86,13 +91,22 @@ import { DialogDeletePostWrapperComponent } from './components/post-editor/dialo
     MatSortModule,
     MatTableModule,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatOptionModule,
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, {dataEncapsulation: false}
     // ),
     MatCardModule, MatButtonModule,
 
   ],
-  providers: [BaseServiceService, SessionStorageService],
+  providers: [
+    BaseServiceService,
+    SessionStorageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent],
   entryComponents: [
     DialogEditWrapperComponent,

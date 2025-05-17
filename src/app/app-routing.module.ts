@@ -16,6 +16,9 @@ import { UserpageSettingsComponent } from './components/dialog-edit-profile-wrap
 import { UserpageComponent } from './components/userpage/userpage.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { BlogPageComponent } from './components/blog.page/blog.page.component';
+import { WorksComponent } from './components/works/works.component';
+import { BlogsComponent } from './components/blogs/blogs.component';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
     {
@@ -36,10 +39,6 @@ const routes: Routes = [
     },
 
     {
-      path: 'usepagesettings', component:UserpageSettingsComponent
-    },
-
-    {
       path: 'userpage/:id', component:UserpageComponent
     },
 
@@ -50,14 +49,22 @@ const routes: Routes = [
     {
       path: 'posts/:id', component: BlogPageComponent
     },
-
     {
-      path: 'home', component: HomeComponent
+      path: 'blogs', component: BlogsComponent
+    },
+    {
+      path: 'main', component: HomeComponent
+    },
+    {
+      path: 'search', component: SearchComponent
+    },
+    {
+      path: 'works', component: WorksComponent
     },
 
     {
       path: '',
-      redirectTo: '/login',
+      redirectTo: '/main',
       pathMatch: 'full',
     },
     {

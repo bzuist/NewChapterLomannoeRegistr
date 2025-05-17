@@ -1,1 +1,81 @@
-<p>search works!</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NewChapter</title>
+  <link rel="stylesheet" href="./search.component.css" />
+</head>
+
+<body>
+  <div class="nav-bar">
+    <a routerLink="/blogs">Блоги</a>
+    <a routerLink="/main">Главная</a>
+    <a routerLink="/works">Работы</a>
+    <div class="logo-container">
+      <img src="https://pngimg.com/d/book_PNG2107.png" alt="NewChapter Logo" width="100" />
+      <p>NewChapter</p>
+    </div>
+    <a routerLink="/search">Поиск</a>
+    <a routerLink="/menu">Пользовательское соглашение</a>
+    <a routerLink="/userpage/:id">Домой</a>
+  </div>
+
+  <div class="auth-card-wrapper">
+    <div class="auth-card">
+      <div *ngIf="isLoggedIn">
+        <p>Добро пожаловать, {{ userDisplayName }}!</p>
+        <button (click)="goToProfile()">Мой профиль</button>
+        <button (click)="logout()">Выйти</button>
+      </div>
+
+      <div *ngIf="!isLoggedIn">
+        <p>Вы не авторизованы</p>
+        <button (click)="goToLogin()">Войти</button>
+        <button (click)="goToRegister()">Зарегистрироваться</button>
+      </div>
+    </div>
+  </div>
+
+    <div class="search-container">
+      <h2>Поиск фанфиков</h2>
+
+      <div class="search-options">
+        <label>
+          <input type="radio" name="searchType" [(ngModel)]="searchType" value="title" />
+          По названию
+        </label>
+        <label>
+          <input type="radio" name="searchType" [(ngModel)]="searchType" value="genre" />
+          По жанру
+        </label>
+      </div>
+
+      <div *ngIf="searchType === 'title'" class="search-field">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (input)="searchByTitle()"
+          placeholder="Введите название фанфика"
+        />
+      </div>
+
+      <div *ngIf="searchType === 'genre'" class="search-field">
+        <select [(ngModel)]="selectedGenreID" (change)="searchByGenre()">
+          <option *ngFor="let genre of genres" [value]="genre.genreID">{{ genre.genre }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngIf="searchResults.length > 0" class="results">
+      <h3>Результаты:</h3>
+      <div class="grid">
+        <div *ngFor="let work of searchResults" class="card">
+          <h3><strong>Название работы:</strong> {{ work.name }}</h3>
+          <h3><strong>Описание работы:</strong> {{ work.description }}</h3>
+          <p> <strong>Автор:</strong>{{ work.authorLogin }}</p>
+          <button mat-flat-button color="white" (click)="goToReadComponent(work.id)">
+            Читать далее
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>

@@ -33,143 +33,261 @@
       ]
     },
     {
-      "id": "4423",
-      "username": "1222bb",
-      "password": "123456",
-      "role": "AUTHOR"
+      "id": "5",
+      "username": "reader123",
+      "password": "password123",
+      "roles": [
+        "SUPER_USER"
+      ]
+    },
+    {
+      "id": "6",
+      "username": "writer001",
+      "password": "writerpass",
+      "roles": [
+        "AUTHOR"
+      ]
+    },
+    {
+      "id": "7",
+      "username": "fanatic92",
+      "password": "ilovebooks",
+      "roles": [
+        "SUPER_USER"
+      ]
+    },
+    {
+      "id": "8",
+      "username": "editor456",
+      "password": "editormaster",
+      "roles": [
+        "SUPER_USER"
+      ]
     }
   ],
   "genres": [
     {
-      "id": "1",
-      "name": "Drama"
+      "genreID": "1",
+      "genre": "Drama",
+      "id": "faed"
     },
     {
-      "id": "2",
-      "name": "Romance"
+      "genreID": "2",
+      "genre": "Romance",
+      "id": "9d35"
+    },
+    {
+      "genreID": "3",
+      "genre": "Fantasy",
+      "id": "cd27"
+    },
+    {
+      "genreID": "4",
+      "genre": "Horror",
+      "id": "f288"
+    },
+    {
+      "genreID": "5",
+      "genre": "Science Fiction",
+      "id": "bb5b"
     }
   ],
   "fanfic": [
     {
-      "id": "2",
-      "name": "yt zjq",
-      "author": "author1",
-      "description": "asdasd",
-      "text": "asdasd",
-      "genre": "Drama"
+      "id": "1",
+      "name": "The Echo of Silence",
+      "userID": 5,
+      "description": "This story follows a young girl who discovers a hidden world filled with magic and secrets. As she delves further into this enchanting realm, she realizes that her destiny is intertwined with that of the land itself. The challenges she faces are not just external but also resonate within her heart, questioning who she really is and what she desires.",
+      "text": "In the solitude of the forest, where sunlight barely pierced through the dense canopy, lived Elara, a girl burdened by the weight of loneliness. Every day she ventured deeper into the woods, seeking solace in its silence. The trees whispered tales of ancient times, and she wondered if she would ever uncover their mysteries. One day, she stumbled upon a shimmering portal hidden behind an ancient oak tree. Curiosity ignited her spirit, and with a deep breath, she stepped through.\n\nOn the other side lay a world unlike any she had known. Colors erupted around her, vibrant and alive. Creatures of all shapes and sizes roamed freely, their laughter mingling with the melody of a distant brook. Elara was captivated. As days turned to weeks, she met many friends and learned about magic that bound this world together. However, looming shadows grew as dark forces threatened to tear apart the harmony of her new home. Elara realized she had a purpose: to protect this realm. But the journey ahead would test her courage, reveal hidden truths, and demand sacrifices she never anticipated.\n\nEmboldened by newfound friends, she embarked on an epic quest filled with triumph and despair. Each step drew her closer to uncovering the shadows within herself, leading her to understand that true strength comes not just from outer magic but from within. The fate of two worlds hinged on her choices — would she rise to the challenge or falter under the weight of destiny?",
+      "genreID": [
+        4
+      ]
     },
     {
       "id": "3",
-      "name": "Lost boys",
-      "author": "author1",
-      "description": "They are Lost Boys, all of them haunted by their own tragic fates. This is the story of how they met each other. A story of friendship, love, and betrayal",
-      "text": "They are Lost Boys, all of them haunted by their own tragic fates. This is the story of how they met each other. A story of friendship, love, and betrayal",
-      "genre": "Drama"
+      "name": "Galactic Echoes",
+      "userID": 5,
+      "description": "A space explorer races against time to save a dying planet, navigating treacherous galaxies filled with strange creatures and perilous obstacles. In a race against fate, alliances will form, and sacrifices will be made as the fate of countless worlds hangs in the balance.",
+      "text": "Commander Jax Orion stood on the bridge of the starship Nebula, staring into the abyss of space. A message had come through just hours before — the planet Zareth, once thriving with life, was on the brink of extinction. The stars above shimmered like distant memories, all too familiar yet forever out of reach. Jax knew that time was running out; the fate of millions rested on his shoulders.\n\nSetting a course for Zareth, the crew worked tirelessly, their unity tested by the ominous news. As they traveled deeper into the cosmos, they encountered ferocious storms, alien ships, and formidable foes. Each challenge brought them closer together, forging bonds that would last a lifetime. Yet, their mission was fraught with peril. The remnants of an ancient war still echoed in the cosmic winds, threatening to ensnare them in a web of conflict.\n\nUpon arrival, Jax discovered that Zareth’s plight was tied to a deeper conspiracy, one that reached far beyond his comprehension. With each revelation, he found himself battling not only against external forces but also the darkness within. Would his courageous decisions lead them to salvation, or would they be swallowed by the very stars they sought to protect? In a race against time, the weight of the universe bore down upon him, forcing him to confront the echoes of his past — and the legacy he sought to leave behind.",
+      "genreID": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "4",
+      "name": "The Dark Forest",
+      "userID": 5,
+      "description": "A chilling tale of a forest that holds dark secrets, where every shadow hides a story and every whisper carries the weight of the past. As one family delves into its depths, they must navigate their own fears to uncover the truth.",
+      "text": "The villagers spoke of the Dark Forest in hushed tones, casting wary glances towards its borders. Few dared to enter, for those who did rarely returned unchanged. The forest was a labyrinth of gnarled trees and mist, its secrets woven into the very fabric of the land. When Clara and her family moved to the area, they couldn’t shake the feeling that something was watching them from beyond the tree line.\n\nOne fateful evening, curiosity got the better of them. They ventured into the woods, drawn by a melody that seemed to beckon them deeper into the shadows. With each step, the air thickened, the trees seemed to close in around them, and the haunting melody morphed into whispers — whispers of lost souls, echoing the regrets and dreams of those who had come before.\n\nAs they journeyed further, Clara found herself entangled in the stories of the forest: a tale of betrayal, love, and sacrifice, where each tree bore witness to the passage of time. The deeper they delved, the more the forest revealed its secrets, testing their resolve and forcing them to confront fears long buried. Would they find the key to breaking the forest's curse, or would they become just another chapter in its dark tale? With the weight of their family's legacy hanging in the balance, the true battle was against the darkness within themselves and the choices they were yet to make.",
+      "genreID": [
+        2,
+        4
+      ]
     },
     {
       "id": "5",
-      "name": "Legilimency",
-      "author": "author3",
-      "description": "Tom comes to Dumbledore with an unusual request.",
-      "text": "I can make them hurt if I want to.",
-      "genre": "Romance"
+      "name": "The Last Horizon",
+      "userID": 5,
+      "description": "A gripping tale of survival on a distant planet, where one expedition team uncovers the remnants of a lost civilization. As they unravel the mysteries left behind, they must grapple with the implications of their discoveries.",
+      "text": "The barren landscape stretched endlessly beneath the twin suns, casting long shadows that danced across the dusty plains. The team of explorers, led by Captain Lira Frost, stepped cautiously from their vessel, their hearts pounding with a mix of excitement and trepidation. This was the last unexplored corner of the galaxy, and the rumors of a lost civilization were too compelling to resist.\n\nAs they journeyed deeper into the heart of the planet, remnants of the ancient society began to emerge — crumbling structures adorned with symbols long forgotten. Whispers of their history played tricks on Lira's mind, invoking visions of a time when harmony reigned. But as they delved into the ruins, the team discovered not all was as it seemed. Strange occurrences haunted their every move: shadows that lingered, echoes of laughter that faded into silence, and a growing sense of dread that gnawed at their sanity.\n\nEach finding brought with it more questions than answers. What had happened to the civilization that once thrived here? Why had they vanished? As the team faced one obstacle after another, they also confronted their own ambitions and moral dilemmas, each discovery weighing heavily on their conscience. With the stakes rising and tensions flaring, Lira knew the true challenge lay not just in uncovering the secrets of the past but in facing the darker aspects of human nature itself. Would they emerge from the shadows, or would the last horizon become their final resting place?",
+      "genreID": [
+        1,
+        4
+      ]
     },
     {
-      "id": "6",
-      "name": "The Silent Melody",
-      "author": "author2",
-      "description": "A heartwarming tale of an unlikely friendship between two musicians in a bustling city.",
-      "text": "In the heart of the city, where the noise was relentless, there lived a violinist named Clara. She played under the streetlights, pouring her heart into each note that echoed against the cold pavement. One fateful night, a weary traveler named Leo stumbled upon her performance. Captivated by the haunting melodies, he found himself drawn to her music and eventually to her soul. As their lives intertwined, they discovered that the silent struggles of their pasts could only be healed through the power of friendship and the magic of music.",
-      "genre": "Romance"
+      "id": "37ae",
+      "name": "Вопрос",
+      "userID": 1,
+      "description": "&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;",
+      "text": "&#1054;&#1090;&#1074;&#1077;&#1090;",
+      "genreID": [
+        "9d35",
+        "cd27"
+      ],
+      "fanficcommentID": null,
+      "authorLogin": "admin"
+    },
+    {
+      "id": "38",
+      "name": "Вопрос",
+      "userID": 1,
+      "description": "&#1074;&#1072;&#1086;&#1076;&#1099;&#1083;&#1078;&#1076;&#1099;&#1074;&#1072;",
+      "text": "&#1054;&#1090;&#1074;&#1077;&#1090;",
+      "genreID": "9d35",
+      "fanficcommentID": null,
+      "authorLogin": "admin"
+    },
+    {
+      "id": "39",
+      "name": "SD",
+      "userID": 1,
+      "description": "asdsadas",
+      "text": "asdsadsada",
+      "genreID": [
+        2,
+        1
+      ],
+      "fanficcommentID": null,
+      "authorLogin": "admin"
+    },
+    {
+      "id": "40",
+      "name": "ываываыа",
+      "userID": 1,
+      "description": "&#1074;&#1072;&#1099;&#1072;&#1099;&#1074;&#1072;",
+      "text": "&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;&#1099;",
+      "genreID": [
+        "9d35",
+        "cd27",
+        "f288"
+      ],
+      "fanficcommentID": null,
+      "authorLogin": "admin"
     }
   ],
   "posts": [
     {
       "id": "1",
-      "userID": 1,
-      "title": "Первый пост",
-      "postdescription": "Это описание первого поста.",
+      "userID": 5,
+      "title": "Чтение под дождём",
+      "postdescription": "Что вы любите читать во время дождя? Я всегда находила, что дождь создает идеальную атмосферу для чтения. За окном моросит, а ты уютно устроился с книгой, чашкой чая и теплым пледом. Вот несколько рекомендаций для чтения, когда снаружи бушует непогода:\n\n1. **Классика** — многим кажется, что книги, написанные десятилетия назад, скучные, но на самом деле они могут научить нас многому. Произведения Достоевского, Толстого или Чекова заставляют задуматься о вечных вопросах: что такое жизнь, любовь и страдание?\n\n2. **Фэнтези** — когда дождь стучит по окнам, хорошо погружаться в другие миры, полные магии и приключений. «Гарри Поттер» и «Властелин колец» — прекрасные примеры, которые могут захватить ваше воображение и увести далеко от повседневных забот.\n\n3. **Детективы** — если вы любите разгадывать головоломки, то дождь — отличное время, чтобы попробовать разгадать, кто же убийца в последнем романе Агаты Кристи.\n\nСкоро грядут осенние дожди, и я с нетерпением жду возможности снова погрузиться в книги. Какие произведения предпочитаете вы? Напишите в комментариях, если у вас есть свои рекомендации!",
       "postcommentID": 101
+    },
+    {
+      "id": "2",
+      "userID": 6,
+      "title": "Мой любимый фанфик",
+      "postdescription": "Поделитесь своим любимым фанфиком и почему он вам нравится. Я наткнулась на несколько удивительных работ в последнее время, которые совершенно изменили мой взгляд на мир фанфиков. Мне нравится, когда авторы берут персонажей, которых мы знаем и любим, и помещают их в совершенно новые ситуации. Это не только дает свежий взгляд на знакомых героев, но и вызывает у нас глубокие эмоции.\n\nНа мой взгляд, один из лучших вариантов — это пересматривать уже известные истории, меняя при этом финал. Это дает нам возможность взглянуть на результат, который мог бы быть совершенно другим. Я также люблю видеть кроссоверы между разными мирами, когда персонажи из одного произведения встречаются с героями из другого. Такой подход открывает новые горизонты и вызывает множество вопросов о том, как они будут взаимодействовать друг с другом.\n\nЯ также не могу не упомянуть о крутых альтернативных вселенных. Они позволяют авторам взять персонажей и поместить их в допустимые, но невероятно разные ситуации. Это захватывающе, когда в знакомой истории появляется совершенно новый, неожиданный поворот событий.\n\nВ общем, я обожаю фанфики и все возможные варианты, которые они предлагают. Какие ваши любимые работы? Поделитесь ими в комментариях, давайте обсудим!",
+      "postcommentID": 102
+    },
+    {
+      "id": "3",
+      "userID": 7,
+      "title": "Обсуждение трилогии",
+      "postdescription": "Как вы относитесь к последней книге из трилогии? У меня есть множество смешанных эмоций по этому поводу. С одной стороны, я была рада увидеть, как все кончится, но с другой стороны, прощаться с персонажами так сложно. Каждый из них прошел огромный путь, и я не могла не почувствовать, что часть меня уходит вместе с ними.\n\nЯ хочу обсудить ключевые моменты финала и то, что вы думаете о решениях, которые сделали персонажи. Некоторые моменты были неожиданными, и я хочу узнать, как вы к ним относитесь. Например, как вы оцениваете финальную битву? Была ли она удовлетворительной для вас? Лично для меня она была великолепной и эмоциональной, но определённые моменты оставили меня в замешательстве.\n\nКроме того, я любила, как авторы связывают многие моменты из предыдущих книг, что давало чувство завершенности. Это не просто эпопея, это история о росте и изменениях, и это то, что делает её такой особенной.\n\nОбсудим все детали — поделитесь вашим мнением и анализом! Я хочу услышать каждую деталь и переживание, так как для меня это важно!",
+      "postcommentID": 103
+    },
+    {
+      "id": "4",
+      "userID": 5,
+      "title": "Доктор Кто: Время перемен",
+      "postdescription": "Я пересмотрела несколько сезонов 'Доктора Кто' и не могу не делиться своими мыслями! Этот сериал снова и снова удивляет меня своей способностью создавать крутые временные линии и интригующие сюжеты. Одна из вещей, которая поразила меня, — это как персонажи развиваются на протяжении всей истории. Каждая новая сезоновая врата открывает новые возможности для развития и открытия для главного героя.\n\nПараллельно с этим, музыка. Она просто превосходна. Каждая нота, каждое изменение мелодии так отлично служат для повышения напряжения сцены или облегчения момента. И когда речь идет о персонажах, я люблю различных инкарнаций Доктора и их характеры. Каждый из них по-своему уникален и представляет различные аспекты, которые делают его таким красивым и сложным существом, каким он есть. Каковы ваши любимые сезоны или повороты сюжета? Я хочу знать и обитать в обсуждении с вами!",
+      "postcommentID": 104
+    },
+    {
+      "id": "5",
+      "userID": 6,
+      "title": "Проблема выбора",
+      "postdescription": "В жизни каждый из нас сталкивается с множеством выборов, и иногда они могут оказаться очень сложными. За последнее время я создала список вопросов, которые помогают мне разобраться в том, что важно для меня. В нашем быстро меняющемся мире, где каждое решение может повлиять на дальнейший путь, стоит задуматься: чего же я действительно хочу? Задаваться вопросами о том, чего мы желаем, и о том, что движет нами — это важная часть самопознания.\n\nЧто для вас важнее: стабильность или приключения? Если бы у вас была одна неделя, чтобы осуществить свою мечту, что бы вы сделали? Каждый вопрос имеет свое значение и, по большому счету, меняет всю картину. Мне было интересно, как вы справляетесь с подобными дилеммами в вашей жизни. Какие вопросы помогли вам? Готова обсудить! Ведь иногда полезно поделиться другими мнениями и мнениями.",
+      "postcommentID": 105
     }
   ],
   "postcomments": [
     {
-      "postcommentID": 101,
-      "userID": 1,
-      "postId": 1,
-      "comment": "Это комментарий к первому посту.",
-      "id": "a1b2"
-    },
-    {
-      "postcommentID": 102,
-      "userID": 2,
-      "postId": 2,
-      "comment": "Это комментарий ко второму посту.",
-      "id": "c3d4"
-    },
-    {
       "postcommentID": 103,
-      "userID": 3,
-      "postId": 3,
-      "comment": "Это комментарий к третьему посту.",
-      "id": "e5f6"
+      "userID": 5,
+      "postId": 4,
+      "comment": "Я люблю читать детективы под дождем.",
+      "id": "caf6"
     },
     {
       "postcommentID": 104,
-      "userID": 4,
-      "postId": 4,
-      "comment": "Это комментарий к четвёртому посту.",
-      "id": "g7h8"
+      "userID": 6,
+      "postId": 5,
+      "comment": "Мой любимый фанфик - это 'Галактические Эхо'! Он просто потрясающий!",
+      "id": "d863"
     },
     {
       "postcommentID": 105,
-      "userID": 8038,
-      "postId": 5,
-      "comment": "Это комментарий к пятому посту.",
-      "id": "i9j0"
+      "userID": 7,
+      "postId": 6,
+      "comment": "Не могу дождаться выхода следующей книги в трилогии!",
+      "id": "53d0"
     }
   ],
   "bookcomments": [
     {
-      "bookcommentID": 1,
-      "userID": 1,
-      "fanficId": 2,
-      "comment": "Это комментарий к фанфику.",
-      "id": "a1b2"
+      "bookcommentID": 4,
+      "userID": 5,
+      "fanficId": 7,
+      "comment": "Это невероятный фанфик! Потрясающая история.",
+      "id": "701f"
     },
     {
-      "bookcommentID": 2,
-      "userID": 2,
-      "fanficId": 3,
-      "comment": "Это комментарий ко второму фанфику.",
-      "id": "c3d4"
+      "bookcommentID": 5,
+      "userID": 6,
+      "fanficId": 8,
+      "comment": "Настоящий ужас! Один из лучших рассказов в жанре.",
+      "id": "638b"
     },
     {
-      "bookcommentID": 3,
-      "userID": 3,
-      "fanficId": 4,
-      "comment": "Это комментарий к третьему фанфику.",
-      "id": "e5f6"
+      "bookcommentID": 6,
+      "userID": 7,
+      "fanficId": 9,
+      "comment": "Научная фантастика всегда была моим любимым жанром!",
+      "id": "3707"
     }
   ],
   "bookshelf": [
     {
-      "bookshelfID": 1,
-      "userID": 1,
-      "fanficId": 2,
-      "id": "a1b2"
+      "bookshelfID": 4,
+      "userID": 5,
+      "fanficId": 7,
+      "id": "04cd"
     },
     {
-      "bookshelfID": 2,
-      "userID": 2,
-      "fanficId": 3,
-      "id": "c3d4"
+      "bookshelfID": 5,
+      "userID": 6,
+      "fanficId": 8,
+      "id": "2c56"
     },
     {
-      "bookshelfID": 3,
-      "userID": 3,
-      "fanficId": 4,
-      "id": "e5f6"
+      "bookshelfID": 6,
+      "userID": 7,
+      "fanficId": 9,
+      "id": "610c"
     }
   ]
 }
