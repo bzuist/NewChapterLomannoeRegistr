@@ -46,9 +46,9 @@
         <div class="text">
           <h1>{{fanfic.name}}</h1>
           <p><strong>Автор:</strong> {{ authorName }}</p>
-          <p>{{fanfic.description}}</p>
+          <div [innerHTML]="decodeHtml(fanfic.description)"></div>
           <p><strong>Жанры:</strong> {{ genreNames}}</p>
-          <p id="fanficText">{{fanfic.text}}</p>
+          <div id="fanficText" [innerHTML]="decodeHtml(fanfic.text)"></div>
         </div>
       </div>
 

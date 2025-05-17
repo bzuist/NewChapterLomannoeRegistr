@@ -4,7 +4,7 @@ export class Fanfic {
   userID: number;
   description: string;
   text: string;
-  genreID: number | string | number[];
+  genreID: number[];
   fanficcommentID: number;
   authorLogin: string;
 
@@ -24,7 +24,7 @@ export interface Fanfic {
   userID: number;
   description: string;
   text: string;
-  genreID: number | string | number[];
+  genreID: number[];
   fanficcommentID: number;
   authorLogin: string;
 }

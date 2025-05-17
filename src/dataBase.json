@@ -68,28 +68,23 @@
   "genres": [
     {
       "genreID": "1",
-      "genre": "Drama",
-      "id": "faed"
+      "genre": "Drama"
     },
     {
       "genreID": "2",
-      "genre": "Romance",
-      "id": "9d35"
+      "genre": "Romance"
     },
     {
       "genreID": "3",
-      "genre": "Fantasy",
-      "id": "cd27"
+      "genre": "Fantasy"
     },
     {
       "genreID": "4",
-      "genre": "Horror",
-      "id": "f288"
+      "genre": "Horror"
     },
     {
       "genreID": "5",
-      "genre": "Science Fiction",
-      "id": "bb5b"
+      "genre": "Science Fiction"
     }
   ],
   "fanfic": [
@@ -109,10 +104,7 @@
       "userID": 5,
       "description": "A space explorer races against time to save a dying planet, navigating treacherous galaxies filled with strange creatures and perilous obstacles. In a race against fate, alliances will form, and sacrifices will be made as the fate of countless worlds hangs in the balance.",
       "text": "Commander Jax Orion stood on the bridge of the starship Nebula, staring into the abyss of space. A message had come through just hours before — the planet Zareth, once thriving with life, was on the brink of extinction. The stars above shimmered like distant memories, all too familiar yet forever out of reach. Jax knew that time was running out; the fate of millions rested on his shoulders.\n\nSetting a course for Zareth, the crew worked tirelessly, their unity tested by the ominous news. As they traveled deeper into the cosmos, they encountered ferocious storms, alien ships, and formidable foes. Each challenge brought them closer together, forging bonds that would last a lifetime. Yet, their mission was fraught with peril. The remnants of an ancient war still echoed in the cosmic winds, threatening to ensnare them in a web of conflict.\n\nUpon arrival, Jax discovered that Zareth’s plight was tied to a deeper conspiracy, one that reached far beyond his comprehension. With each revelation, he found himself battling not only against external forces but also the darkness within. Would his courageous decisions lead them to salvation, or would they be swallowed by the very stars they sought to protect? In a race against time, the weight of the universe bore down upon him, forcing him to confront the echoes of his past — and the legacy he sought to leave behind.",
-      "genreID": [
-        3,
-        4
-      ]
+      "genreID": "9d35"
     },
     {
       "id": "4",
@@ -137,51 +129,54 @@
       ]
     },
     {
-      "id": "37ae",
-      "name": "Вопрос",
+      "id": "6",
+      "name": "eqwe",
       "userID": 1,
-      "description": "&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;",
-      "text": "&#1054;&#1090;&#1074;&#1077;&#1090;",
-      "genreID": [
-        "9d35",
-        "cd27"
-      ],
+      "description": "weq",
+      "text": "eqw",
+      "genreID": [],
       "fanficcommentID": null,
       "authorLogin": "admin"
     },
     {
-      "id": "38",
-      "name": "Вопрос",
+      "id": "7",
+      "name": "d",
       "userID": 1,
-      "description": "&#1074;&#1072;&#1086;&#1076;&#1099;&#1083;&#1078;&#1076;&#1099;&#1074;&#1072;",
-      "text": "&#1054;&#1090;&#1074;&#1077;&#1090;",
-      "genreID": "9d35",
+      "description": "d",
+      "text": "d",
+      "genreID": [],
       "fanficcommentID": null,
       "authorLogin": "admin"
     },
     {
-      "id": "39",
-      "name": "SD",
+      "id": "8",
+      "name": "в",
       "userID": 1,
-      "description": "asdsadas",
-      "text": "asdsadsada",
-      "genreID": [
-        2,
-        1
-      ],
+      "description": "&#1074;",
+      "text": "&#1074;",
+      "genreID": [],
       "fanficcommentID": null,
       "authorLogin": "admin"
     },
     {
-      "id": "40",
-      "name": "ываываыа",
+      "id": "9",
+      "name": "ы",
       "userID": 1,
-      "description": "&#1074;&#1072;&#1099;&#1072;&#1099;&#1074;&#1072;",
-      "text": "&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;&#1099;&#1074;&#1072;&#1099;",
+      "description": "&#1099;",
+      "text": "&#1099;",
+      "genreID": [],
+      "fanficcommentID": null,
+      "authorLogin": "admin"
+    },
+    {
+      "id": "10",
+      "name": "dsd",
+      "userID": 1,
+      "description": "dd",
+      "text": "dd",
       "genreID": [
-        "9d35",
-        "cd27",
-        "f288"
+        "2",
+        "3"
       ],
       "fanficcommentID": null,
       "authorLogin": "admin"

@@ -45,7 +45,7 @@
       <div class="grid">
         <div *ngFor="let work of Fanfic" class="card">
           <h3>Название работы: {{ work.name }}</h3>
-          <h3>Описание работы: {{ work.description }}</h3>
+          <h3>Описание работы:</h3><div [innerHTML]="decodeHtml(work.description)"></div>
           <p>Автор: {{ work.authorLogin }}</p>
           <button mat-flat-button color="white" (click)="goToReadComponent(work.id)">Читать далее</button>
         </div>

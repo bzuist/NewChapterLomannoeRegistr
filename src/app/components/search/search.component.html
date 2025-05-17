@@ -70,7 +70,7 @@
       <div class="grid">
         <div *ngFor="let work of searchResults" class="card">
           <h3><strong>Название работы:</strong> {{ work.name }}</h3>
-          <h3><strong>Описание работы:</strong> {{ work.description }}</h3>
+          <h3><strong>Описание работы:</strong> <div [innerHTML]="decodeHtml(work.description)"></div></h3>
           <p> <strong>Автор:</strong>{{ work.authorLogin }}</p>
           <button mat-flat-button color="white" (click)="goToReadComponent(work.id)">
             Читать далее

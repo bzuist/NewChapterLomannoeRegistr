@@ -146,4 +146,12 @@ goToProfile() {
   } else {
     console.error('ID пользователя не найден');
   }
-}}
+}
+
+decodeHtml(html: string): string {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+     }
+     
+}

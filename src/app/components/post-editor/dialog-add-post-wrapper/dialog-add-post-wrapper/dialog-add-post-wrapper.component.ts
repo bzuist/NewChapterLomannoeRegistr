@@ -56,4 +56,10 @@ export class DialogAddPostWrapperComponent implements OnInit {
     return this.LoggedUser?.name;
   }
 
+  decodeHtml(html: string): string {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+     }
+
 }
