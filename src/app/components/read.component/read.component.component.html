@@ -61,5 +61,37 @@
       <p>Загрузка...</p>
     </ng-template>
 
+
+
+<div class="comments-section">
+  <h3>Комментарии к фанфику</h3>
+
+  <div class="comment-form">
+    <textarea [(ngModel)]="newBookCommentText" placeholder="Ваш комментарий..."></textarea>
+    <button (click)="addBookComment()">Оставить комментарий</button>
+  </div>
+
+  <div *ngFor="let comment of fanficComments" class="comment-card">
+    <div class="comment-header">
+      <strong class="comment-author">{{ Users.get(comment.userID) || 'Аноним' }}</strong>
+
+      <div class="comment-actions" *ngIf="comment.userID === LoggedUser?.userData?.id">
+        <button class="action-btn" (click)="updateComment(comment)">💾</button>
+        <button class="action-btn" (click)="deleteComment(comment.fanficcommentID)">🗑</button>
+      </div>
+    </div>
+
+    <div class="comment-body">
+      <div *ngIf="comment.userID === LoggedUser?.userData?.id; else otherComment">
+        <textarea [(ngModel)]="comment.bookcomment"></textarea>
+      </div>
+      <ng-template #otherComment>
+        <p>{{ comment.bookcomment }}</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+
 </body>
 </html>

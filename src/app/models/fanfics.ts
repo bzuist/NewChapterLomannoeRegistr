@@ -5,7 +5,7 @@ export class Fanfic {
   description: string;
   text: string;
   genreID: number[];
-  fanficcommentID: number;
+  fanficcommentID: number[];
   authorLogin: string;
 
 constructor(data: any, usersMap: Map<number, string>) {
@@ -25,6 +25,6 @@ export interface Fanfic {
   description: string;
   text: string;
   genreID: number[];
-  fanficcommentID: number;
+  fanficcommentID: number[];
   authorLogin: string;
 }

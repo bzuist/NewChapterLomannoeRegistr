@@ -68,23 +68,28 @@
   "genres": [
     {
       "genreID": "1",
-      "genre": "Drama"
+      "genre": "Drama",
+      "id": "9bff"
     },
     {
       "genreID": "2",
-      "genre": "Romance"
+      "genre": "Romance",
+      "id": "b85a"
     },
     {
       "genreID": "3",
-      "genre": "Fantasy"
+      "genre": "Fantasy",
+      "id": "8140"
     },
     {
       "genreID": "4",
-      "genre": "Horror"
+      "genre": "Horror",
+      "id": "a16b"
     },
     {
       "genreID": "5",
-      "genre": "Science Fiction"
+      "genre": "Science Fiction",
+      "id": "a63b"
     }
   ],
   "fanfic": [
@@ -223,48 +228,101 @@
     {
       "postcommentID": 103,
       "userID": 5,
-      "postId": 4,
-      "comment": "Я люблю читать детективы под дождем.",
-      "id": "caf6"
+      "bookID": 4,
+      "comment": "Я люблю читать детективы под дождем."
     },
     {
       "postcommentID": 104,
       "userID": 6,
-      "postId": 5,
-      "comment": "Мой любимый фанфик - это 'Галактические Эхо'! Он просто потрясающий!",
-      "id": "d863"
+      "bookID": 5,
+      "comment": "Мой любимый фанфик - это 'Галактические Эхо'! Он просто потрясающий!"
     },
     {
       "postcommentID": 105,
       "userID": 7,
-      "postId": 6,
-      "comment": "Не могу дождаться выхода следующей книги в трилогии!",
-      "id": "53d0"
+      "bookID": 6,
+      "comment": "Не могу дождаться выхода следующей книги в трилогии!"
     }
   ],
   "bookcomments": [
     {
       "bookcommentID": 4,
       "userID": 5,
-      "fanficId": 7,
-      "comment": "Это невероятный фанфик! Потрясающая история.",
-      "id": "701f"
+      "bookID": 7,
+      "bookcomment": "Это невероятный фанфик! Потрясающая история."
     },
     {
       "bookcommentID": 5,
       "userID": 6,
-      "fanficId": 8,
-      "comment": "Настоящий ужас! Один из лучших рассказов в жанре.",
-      "id": "638b"
+      "bookID": 8,
+      "bookcomment": "Настоящий ужас! Один из лучших рассказов в жанре."
     },
     {
       "bookcommentID": 6,
       "userID": 7,
-      "fanficId": 9,
-      "comment": "Научная фантастика всегда была моим любимым жанром!",
-      "id": "3707"
-    }
-  ],
+      "bookID": 9,
+      "bookcomment": "Научная фантастика всегда была моим любимым жанром!"
+    },
+    {
+      "bookcommentID": 20,
+      "userID": 1,
+      "bookID": 1,
+      "bookcomment": "аываа"
+    },
+    {
+      "bookcommentID": 22,
+      "bookID": "1",
+      "userID": 1,
+      "bookcomment": "fff"
+    },
+    {
+      "id": "9f8a",
+      "bookID": "4",
+      "userID": 1,
+      "bookcomment": "fdsdfsf"
+    },
+    {
+      "id": "e29b",
+      "bookID": "4",
+      "userID": 1,
+      "bookcomment": "ssssssssss"
+    },
+    {
+      "id": "5e74",
+      "bookID": "4",
+      "userID": 1,
+      "bookcomment": "лол кек чебурек ахуеть получилось\n"
+    },
+    {
+      "id": "eb71",
+      "bookID": "4",
+      "userID": 1,
+      "bookcomment": "ы"
+    },
+     {
+      "id": "5e75",
+      "bookID": "4",
+      "userID": 2,
+      "bookcomment": "лол кек чебурек ахуеть получилось\n"
+    },
+  {
+      "id": "5e76",
+      "bookID": "4",
+      "userID": 3,
+      "bookcomment": "лол кек чебурек ахуеть получилось\n"
+    },
+  {
+      "id": "5e77",
+      "bookID": "4",
+      "userID": 3,
+      "bookcomment": "сам в ахуе\n"
+    },
+  {
+      "id": "5e79",
+      "bookID": "4",
+      "userID": 4,
+      "bookcomment": "Аська, дай людям отдохнуть!!!!!!!!!\n"
+    }      ],
   "bookshelf": [
     {
       "bookshelfID": 4,
