@@ -34,4 +34,10 @@ export class DialogChangeWrapperComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  decodeHtml(html: string): string {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+     }
 }

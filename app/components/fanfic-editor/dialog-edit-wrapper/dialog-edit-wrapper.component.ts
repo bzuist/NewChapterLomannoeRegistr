@@ -9,6 +9,8 @@ import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CredentialResponse } from 'src/app/models/auth/CredentialResponse';
 import { User } from 'src/app/models/user';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-dialog-edit-wrapper',
@@ -21,31 +23,56 @@ export class DialogEditWrapperComponent implements OnInit {
   fanfics: Fanfic[];
   genres: Genre[];
   genreID: number;
+  selectedGenres: number[] = [];
 
   constructor(public dialogRef: MatDialogRef<DialogEditWrapperComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
     ngOnInit() {
-      const user = this.LoggedUser;
+  this.genres = this.data.genres || [];
+  console.log("Genres:", this.genres);
 
-      const userId = user.userData?.id;
-      const username = user.userData?.username;
+  const user = this.LoggedUser;
 
-      const usersMap = new Map<number, string>();
-      if (userId && username) {
-        usersMap.set(Number(userId), username);
-      }
+  if (!user || !user.userData?.id || !user.name) {
+    console.error("Пользователь не авторизован или данные некорректны");
+    return;
+  }
+  const userId = +user.userData?.id;
+  const username = user.name;
 
-      const fanficData = {
-        ...this.data.fanfic,
-        userID: userId,
-        author: userId,
-      };
-      console.log(this.data.genres)
-      this.editingFanfic = new Fanfic(fanficData, usersMap);
+  const usersMap = new Map<number, string>();
+  if (userId && username) {
+    usersMap.set(userId, username);
+  }
 
-    }
+  this.selectedGenres = this.data.fanfic.genreID
+    ? this.data.fanfic.genreID
+        .map((id: string | number) => Number(id))
+        .filter((id: number) => !isNaN(id))
+    : [];
 
+  const fanficData = {
+    ...this.data.fanfic,
+    userID: userId,
+    author: userId,
+    genreID: this.selectedGenres, 
+  };
+
+  console.log("Processed fanficData:", fanficData);
+
+  this.editingFanfic = new Fanfic(fanficData, usersMap);
+
+  console.log("Username:", username, "UserID:", userId);
+
+  console.log('selectedGenres:', this.selectedGenres);
+
+}
+
+onSave(): void {
+  this.editingFanfic.genreID = this.selectedGenres;
+  this.dialogRef.close(this.editingFanfic);
+}
     onNoClick(): void {
       this.dialogRef.close();
     }
@@ -55,4 +82,18 @@ export class DialogEditWrapperComponent implements OnInit {
       if (!auth) return new CredentialResponse();
       return JSON.parse(auth) as CredentialResponse;
     }
-  }
+    
+    get userDisplayName(): string {
+      return this.LoggedUser?.name || 'Неизвестный пользователь';
+    }
+
+    decodeHtml(html: string): string {
+      const txt = document.createElement('textarea');
+      txt.innerHTML = html;
+      return txt.value;
+    }
+
+    toNumber(value: any): number {
+  return Number(value);
+}
+}

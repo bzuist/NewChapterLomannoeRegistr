@@ -1,14 +1,14 @@
-<h1 mat-dialog-title>Добавить пост</h1>
+<h1 mat-dialog-title>Добавить новый пост</h1>
 <div mat-dialog-content style="display: inline; padding: 0px; margin: auto;">
   <mat-form-field class="full-width-input">
-    <input matInput type="text" placeholder="Author name"
+    <input matInput type="text" placeholder="Автор"
       [(ngModel)]="addPost.userID" required>
   </mat-form-field>
   <mat-form-field class="full-width-input">
-    <input matInput type="text" placeholder="Name of Fanfic"
+    <input matInput type="text" placeholder="Заголовок поста"
       [(ngModel)]="addPost.title" required>
   </mat-form-field>
-    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="addPost.postdescription"></angular-editor>
+    <angular-editor [placeholder]="'Начните печатать здесь'" [(ngModel)]="addPost.postdescription"></angular-editor>
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button (click)="onNoClick()">Отмена</button>

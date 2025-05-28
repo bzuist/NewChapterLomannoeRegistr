@@ -1,3 +1,4 @@
+import { ROLE } from './../../auth/auth role';
 import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { Fanfic } from 'src/app/models/fanfics';
 import { BaseServiceService } from 'src/app/service/base-service.service';
@@ -24,6 +25,9 @@ export class ReadComponentComponent implements OnInit {
   fontSize: number = 18;
   genres: Genre[] = [];
   genreNames: string[] = [];
+  newBookCommentText = '';
+  fanficComments: any[] = [];
+  currentficID: number = 0;
 
   constructor(
     private baseService: BaseServiceService,
@@ -65,9 +69,13 @@ export class ReadComponentComponent implements OnInit {
       this.baseService.getFanficById(id).subscribe({
         next: (data) => {
           this.fanfic = data;
+          this.currentficID = this.fanfic.id || 0;
           console.log("Загружен фанфик:", this.fanfic);
+          this.loadBookComments();
           resolve();
+
         },
+
         error: (error) => {
           console.error("Ошибка при загрузке фанфика:", error);
           reject(error);
@@ -145,12 +153,67 @@ export class ReadComponentComponent implements OnInit {
     }
   }
 
+  loadBookComments() {
+  this.baseService.getBookComments(this.currentficID).subscribe(comments => {
+    this.fanficComments = comments;
+  });
+}
+
+  addBookComment() {
+  const bookID = this.currentficID;
+    const userID = Number(this.LoggedUser?.userData?.id);
+
+  if (!userID) {
+    alert("Пользователь не авторизован");
+    return;
+  }
+
+  this.baseService.addBookComment(bookID, userID, this.newBookCommentText).subscribe(() => {
+    this.newBookCommentText = '';
+    this.loadBookComments();
+  });
+    };
+
+
+
+updateComment(comment: any) {
+  this.baseService.updateBookComment(comment.fanficcommentID, comment.comment).subscribe(() => {
+    alert('Комментарий обновлён');
+  });
+}
+
+deleteComment(commentID: number) {
+  if (!confirm('Удалить комментарий?')) return;
+
+  this.baseService.deleteBookComment(commentID).subscribe(() => {
+    alert('Комментарий удалён');
+    this.loadBookComments();
+  });
+}
   applyFontSize() {
     const textElement = this.elRef.nativeElement.querySelector("#fanficText");
     if (textElement) {
       textElement.style.fontSize = `${this.fontSize}px`;
     }
   }
+
+ canManageComment(comment: any): boolean {
+  const currentUser = this.LoggedUser?.userData;
+  if (!currentUser) return false;
+
+  const currentUserID = Number(currentUser.id);
+  const fanficAuthorID = this.fanfic?.userID;
+  const roles = currentUser?.principal?.authorities?.map((a: any) => a.authority) || [];
+
+  const can =
+    comment.userID === currentUserID ||
+    currentUserID === fanficAuthorID ||
+    roles.includes(ROLE.SUPER_USER);
+
+  console.log({ commentUserID: comment.userID, currentUserID, fanficAuthorID, roles, canManage: can });
+
+  return can;
+}
 
   goToHome() {
     this.router.navigate(['/home']);
@@ -200,4 +263,11 @@ goToLogin() {
       console.error('ID пользователя не найден');
     }
   }
+
+  decodeHtml(html: string): string {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+     }
 }
+

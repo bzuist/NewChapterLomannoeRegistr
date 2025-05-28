@@ -1,6 +1,6 @@
 export class BookComment {
   bookcommentID: number;
   userID: number;
-  postID: number;
+  bookID: number;
   bookcomment: string;
 }

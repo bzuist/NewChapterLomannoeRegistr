@@ -47,7 +47,9 @@ import { WorksComponent } from './components/works/works.component';
 import { BlogsComponent } from './components/blogs/blogs.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { DialogEditCommentWrapperComponentComponent } from './components/dialog-edit-comment-wrapper.component/dialog-edit-comment-wrapper.component/dialog-edit-comment-wrapper.component.component';
 
 
 @NgModule({
@@ -73,7 +75,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     DialogAddPostWrapperComponent,
     DialogDeletePostWrapperComponent,
     WorksComponent,
-    BlogsComponent
+    BlogsComponent,
+    DialogEditCommentWrapperComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +93,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     MatSortModule,
     MatTableModule,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatOptionModule,
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, {dataEncapsulation: false}
     // ),

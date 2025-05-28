@@ -32,11 +32,11 @@
     <div class="content-wrapper">
       <div class="column">
         <h3>Произведения пользователя</h3>
-        <button class="delete" (click)="addFanfic()">Добавить новый пост</button>
+        <button class="delete" (click)="addFanfic()">Добавить новое произведение</button>
         <div class="grid">
           <div *ngFor="let fanfic of fanfics" class="card">
             <h4>{{ fanfic.name }}</h4>
-            <p>{{ fanfic.description }}</p>
+            <div [innerHTML]="decodeHtml(fanfic.description)"></div>
             <div class="buttons">
               <button class="read" (click)="goToReadComponent(fanfic.id)">Читать</button>
               <button class="edit" (click)="changeFanfic(fanfic.id)">Изменить</button>

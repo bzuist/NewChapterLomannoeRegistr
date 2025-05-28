@@ -37,7 +37,7 @@ export class DialogAddPostWrapperComponent implements OnInit {
       const postcData = {
         ...this.data.post,
         userID: userId,
-        author: userId,
+        author: username,
       };
       this.addPost = new Post(this.data.post, new Map<number, string>());
   }
@@ -51,5 +51,15 @@ export class DialogAddPostWrapperComponent implements OnInit {
     if (!auth) return new CredentialResponse();
     return JSON.parse(auth) as CredentialResponse;
   }
+
+  get userDisplayName(): string {
+    return this.LoggedUser?.name;
+  }
+
+  decodeHtml(html: string): string {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+     }
 
 }
