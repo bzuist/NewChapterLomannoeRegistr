@@ -8,6 +8,7 @@ import { User } from '../models/user';
 import { Bookshelf } from '../models/bookshelf';
 import { PostComment } from '../models/postcomment';
 import { BookComment } from '../models/bookcomment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -52,17 +53,24 @@ export class BaseServiceService {
     return this.http.delete(`${this.fanficUrl}/${id}`);
   }
 
-  getFanficsByUserId(userId: number): Observable<Fanfic[]> {
-    return this.http.get<Fanfic[]>(`${this.fanficsUrl}?userId=${userId}`)
+  getFanficsByUserId(userID: number): Observable<Fanfic[]> {
+    return this.http.get<Fanfic[]>(`${this.fanficUrl}?userId=${userID}`)
   }
 
   getUserById(userId: number): Observable<User> {
     return this.http.get<User>(`${this.userUrl}/${userId}`);
   }
 
-  getUserPosts(userId: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.postsUrl}?userId=${userId}`);
+  getUserPosts(userID: number): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.postsUrl}?userId=${userID}`);
   }
+
+  getUserFanfics(userID: number): Observable<Fanfic[]> {
+  return this.http.get<Fanfic[]>(`${this.fanficUrl}`).pipe(
+    map(fanfics => fanfics.filter(f => f.userID === userID))
+  );
+}
+
 
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.postsUrl);
@@ -100,6 +108,7 @@ addBookComment(bookID: number, userID: number, bookcomment: string): Observable<
     bookcomment: newComment
   });
 }
+
 
  deleteBookComment(commentId: number): Observable<void> {
   return this.http.delete<void>(`${this.bookCommentsUrl}/${commentId}`);

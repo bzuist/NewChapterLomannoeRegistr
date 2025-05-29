@@ -1,3 +1,4 @@
+import { DialogEditCommentWrapperComponentComponent } from './../dialog-edit-comment-wrapper.component/dialog-edit-comment-wrapper.component/dialog-edit-comment-wrapper.component.component';
 import { ROLE } from './../../auth/auth role';
 import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { Fanfic } from 'src/app/models/fanfics';
@@ -9,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { Genre } from 'src/app/models/genre';
 import { CredentialResponse } from 'src/app/models/auth/CredentialResponse';
 import { AuthService } from 'src/app/auth/auth.service';
+import { BookComment } from 'src/app/models/bookcomment';
 
 @Component({
   selector: 'app-read.component',
@@ -176,11 +178,30 @@ export class ReadComponentComponent implements OnInit {
 
 
 
-updateComment(comment: any) {
-  this.baseService.updateBookComment(comment.fanficcommentID, comment.comment).subscribe(() => {
-    alert('Комментарий обновлён');
+editComment(comment: BookComment): void {
+  const dialogRef = this.dialog.open(DialogEditCommentWrapperComponentComponent, {
+    data: { comment }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result !== undefined) {
+      const updatedComment: BookComment = {
+        ...comment,
+        bookcomment: result
+      };
+      this.updateComment(updatedComment);
+    }
   });
 }
+
+
+updateComment(comment: BookComment): void {
+  this.baseService.updateBookComment(comment.bookcommentID, comment.bookcomment)
+    .subscribe(() => {
+      alert('Комментарий обновлён');
+    });
+}
+
 
 deleteComment(commentID: number) {
   if (!confirm('Удалить комментарий?')) return;

@@ -1,1 +1,13 @@
-<p>dialog-edit-comment-wrapper.component works!</p>
+<h2 mat-dialog-title>Редактировать комментарий</h2>
+
+<mat-dialog-content>
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Комментарий</mat-label>
+    <textarea matInput [(ngModel)]="editedComment" rows="4"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancelClick()">Отмена</button>
+  <button mat-raised-button color="primary" (click)="onSaveClick()">Сохранить</button>
+</mat-dialog-actions>

@@ -79,26 +79,24 @@ goToLogin() {
       });
   }
 
-  showRandomBooks() {
-    if (this.Users.size === 0) return;
+ showRandomBooks() {
+  if (this.Users.size === 0) return;
 
-    this.http.get<any[]>('http://localhost:3000/fanfic')
-      .subscribe(data => {
-        if (!data || data.length === 0) {
-          console.error('Ошибка: пустой ответ от сервера', data);
-          return;
-        }
+  this.http.get<any[]>('http://localhost:3000/fanfic')
+    .subscribe(data => {
+      if (!data || data.length === 0) {
+        console.error('Ошибка: пустой ответ от сервера', data);
+        return;
+      }
 
-        const randomFanfics = data.sort(() => Math.random() - 0.5);
+      const randomFanfics = data.sort(() => Math.random() - 0.5);
 
-        this.Fanfic = randomFanfics.map(fanfic => {
-          const userID = Array.from(this.Users.entries()).find(([id, name]) => name === fanfic.author)?.[0] || 0;
-          const authorLogin = this.Users.get(userID) || 'Неизвестный автор';
-
-          return new Fanfic({ ...fanfic, userID, authorLogin }, this.Users);
-        });
+      this.Fanfic = randomFanfics.map(fanfic => {
+        const authorLogin = this.Users.get(fanfic.userID) || 'Неизвестный автор';
+        return new Fanfic({ ...fanfic, authorLogin }, this.Users);
       });
-    }
+    });
+}
 
     decodeHtml(html: string): string {
     const txt = document.createElement('textarea');

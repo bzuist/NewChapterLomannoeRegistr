@@ -48,7 +48,7 @@ export class UserpageComponent implements OnInit {
       if (this.id > 0) {
         this.loadUserData(this.id).then(() => {
           if (this.user?.username) {
-            this.loadUserFanfics(this.user.username);
+            this.loadUserFanfics(Number(this.user.userID) || Number(this.user.id));
             this.loadUserPosts(this.user.username);
           }
         });
@@ -98,15 +98,15 @@ export class UserpageComponent implements OnInit {
     });
   }
 
-  loadUserFanfics(username: string): void {
-    this.http.get<Fanfic[]>(`http://localhost:3000/fanfic?author=${username}`).subscribe({
-      next: data => this.fanfics = data,
-      error: error => {
-        console.error('Ошибка при загрузке фанфиков:', error);
-        this.fanfics = [];
-      }
-    });
-  }
+  loadUserFanfics(userID: number): void {
+  this.baseService.getUserFanfics(userID).subscribe({
+    next: (data) => this.fanfics = data,
+    error: (error) => {
+      console.error('Ошибка при загрузке фанфиков:', error);
+      this.fanfics = [];
+    }
+  });
+}
 
   loadUserPosts(username: string): void {
     console.log(`Запрос постов пользователя: ${username}`);
